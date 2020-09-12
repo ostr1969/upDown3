@@ -1,0 +1,1214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenSimDocument Version="40000">
+	<MocoStudy name="4link">
+		<!--The optimal control problem to solve.-->
+		<MocoProblem name="problem">
+			<!--List of 1 or more MocoPhases.-->
+			<MocoPhase name="phases">
+				<!--OpenSim Model to provide dynamics.-->
+				<ModelProcessor name="model">
+					<!--Base model to process.-->
+					<model>
+						<Model name="4linkModel">
+							<!--List of components that this component owns and serializes.-->
+							<components>
+								<PhysicalOffsetFrame name="Cyl1_frame">
+									<!--The geometry used to display the axes of this Frame.-->
+									<FrameGeometry name="frame_geometry">
+										<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+										<socket_frame>..</socket_frame>
+										<!--Scale factors in X, Y, Z directions respectively.-->
+										<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+									</FrameGeometry>
+									<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+									<attached_geometry>
+										<Cylinder name="Cyl1_frame_geom_1">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Radius of cylinder.-->
+											<radius>0.0050000000000000001</radius>
+											<!--Half-Height of cylinder.-->
+											<half_height>0.1042</half_height>
+										</Cylinder>
+										<Cylinder name="Cyl1_frame_geom_2">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Radius of cylinder.-->
+											<radius>0.040000000000000001</radius>
+											<!--Half-Height of cylinder.-->
+											<half_height>0.025000000000000001</half_height>
+										</Cylinder>
+									</attached_geometry>
+									<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+									<socket_parent>/bodyset/foot</socket_parent>
+									<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+									<translation>0 0.1042 0</translation>
+									<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+									<orientation>-0 0 -0</orientation>
+								</PhysicalOffsetFrame>
+								<PhysicalOffsetFrame name="Cyl2_frame">
+									<!--The geometry used to display the axes of this Frame.-->
+									<FrameGeometry name="frame_geometry">
+										<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+										<socket_frame>..</socket_frame>
+										<!--Scale factors in X, Y, Z directions respectively.-->
+										<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+									</FrameGeometry>
+									<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+									<attached_geometry>
+										<Cylinder name="Cyl2_frame_geom_1">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Radius of cylinder.-->
+											<radius>0.0050000000000000001</radius>
+											<!--Half-Height of cylinder.-->
+											<half_height>0.20910000000000001</half_height>
+										</Cylinder>
+										<Cylinder name="Cyl2_frame_geom_2">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Radius of cylinder.-->
+											<radius>0.040000000000000001</radius>
+											<!--Half-Height of cylinder.-->
+											<half_height>0.025000000000000001</half_height>
+										</Cylinder>
+									</attached_geometry>
+									<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+									<socket_parent>/bodyset/shank</socket_parent>
+									<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+									<translation>0 0.20910000000000001 0</translation>
+									<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+									<orientation>-0 0 -0</orientation>
+								</PhysicalOffsetFrame>
+								<PhysicalOffsetFrame name="Cyl3_frame">
+									<!--The geometry used to display the axes of this Frame.-->
+									<FrameGeometry name="frame_geometry">
+										<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+										<socket_frame>..</socket_frame>
+										<!--Scale factors in X, Y, Z directions respectively.-->
+										<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+									</FrameGeometry>
+									<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+									<attached_geometry>
+										<Cylinder name="Cyl3_frame_geom_1">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Radius of cylinder.-->
+											<radius>0.0050000000000000001</radius>
+											<!--Half-Height of cylinder.-->
+											<half_height>0.20824999999999999</half_height>
+										</Cylinder>
+										<Cylinder name="Cyl3_frame_geom_2">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Radius of cylinder.-->
+											<radius>0.040000000000000001</radius>
+											<!--Half-Height of cylinder.-->
+											<half_height>0.025000000000000001</half_height>
+										</Cylinder>
+									</attached_geometry>
+									<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+									<socket_parent>/bodyset/thigh</socket_parent>
+									<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+									<translation>0 0.20824999999999999 0</translation>
+									<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+									<orientation>-0 0 -0</orientation>
+								</PhysicalOffsetFrame>
+								<PhysicalOffsetFrame name="Cyl4_frame">
+									<!--The geometry used to display the axes of this Frame.-->
+									<FrameGeometry name="frame_geometry">
+										<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+										<socket_frame>..</socket_frame>
+										<!--Scale factors in X, Y, Z directions respectively.-->
+										<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+									</FrameGeometry>
+									<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+									<attached_geometry>
+										<Cylinder name="Cyl4_frame_geom_1">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Radius of cylinder.-->
+											<radius>0.0050000000000000001</radius>
+											<!--Half-Height of cylinder.-->
+											<half_height>0.38900000000000001</half_height>
+										</Cylinder>
+									</attached_geometry>
+									<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+									<socket_parent>/bodyset/HAT</socket_parent>
+									<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+									<translation>0 0.38900000000000001 0</translation>
+									<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+									<orientation>-0 0 -0</orientation>
+								</PhysicalOffsetFrame>
+								<PhysicalOffsetFrame name="HAT_offset_frame">
+									<!--The geometry used to display the axes of this Frame.-->
+									<FrameGeometry name="frame_geometry">
+										<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+										<socket_frame>..</socket_frame>
+										<!--Scale factors in X, Y, Z directions respectively.-->
+										<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+									</FrameGeometry>
+									<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+									<attached_geometry>
+										<Cylinder name="HAT_offset_frame_geom_1">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Radius of cylinder.-->
+											<radius>0.040000000000000001</radius>
+											<!--Half-Height of cylinder.-->
+											<half_height>0.025000000000000001</half_height>
+										</Cylinder>
+									</attached_geometry>
+									<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+									<socket_parent>/bodyset/HAT</socket_parent>
+									<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+									<translation>0 0.20000000000000001 0</translation>
+									<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+									<orientation>-0 0 -0</orientation>
+								</PhysicalOffsetFrame>
+								<DelpActuator name="ap">
+									<!--Minimum allowed value for control signal. Used primarily when solving for control values.-->
+									<min_control>-1</min_control>
+									<!--Maximum allowed value for control signal. Used primarily when solving for control values.-->
+									<max_control>1</max_control>
+									<!--Name of the generalized coordinate to which the actuator applies.-->
+									<coordinate>q1</coordinate>
+									<!--The maximum generalized force produced by this actuator.-->
+									<optimal_force>1</optimal_force>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<activation_time_constant>0.010999999999999999</activation_time_constant>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<dactivation_time_constant>0.068000000000000005</dactivation_time_constant>
+									<!--Value of activation in the default state returned by initSystem().-->
+									<default_activation>0</default_activation>
+									<!--Notify 1 if has delp curve, else use optimal force-->
+									<has_delp_curve>1</has_delp_curve>
+									<!--Delp curve filename, file of ang/max biologicl in degrees-->
+									<delp_curve_filename>src/delp1.txt</delp_curve_filename>
+									<!--1 or -1 for velocity factor(ashby)-->
+									<qfac_dir>1</qfac_dir>
+									<!--Maximum velocity in rad/sec if using delp curve-->
+									<max_velocity>16</max_velocity>
+								</DelpActuator>
+								<DelpActuator name="kp">
+									<!--Minimum allowed value for control signal. Used primarily when solving for control values.-->
+									<min_control>-1</min_control>
+									<!--Maximum allowed value for control signal. Used primarily when solving for control values.-->
+									<max_control>1</max_control>
+									<!--Name of the generalized coordinate to which the actuator applies.-->
+									<coordinate>q2</coordinate>
+									<!--The maximum generalized force produced by this actuator.-->
+									<optimal_force>1</optimal_force>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<activation_time_constant>0.010999999999999999</activation_time_constant>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<dactivation_time_constant>0.068000000000000005</dactivation_time_constant>
+									<!--Value of activation in the default state returned by initSystem().-->
+									<default_activation>0</default_activation>
+									<!--Notify 1 if has delp curve, else use optimal force-->
+									<has_delp_curve>1</has_delp_curve>
+									<!--Delp curve filename, file of ang/max biologicl in degrees-->
+									<delp_curve_filename>src/delp4.txt</delp_curve_filename>
+									<!--1 or -1 for velocity factor(ashby)-->
+									<qfac_dir>1</qfac_dir>
+									<!--Maximum velocity in rad/sec if using delp curve-->
+									<max_velocity>18</max_velocity>
+								</DelpActuator>
+								<DelpActuator name="hp">
+									<!--Minimum allowed value for control signal. Used primarily when solving for control values.-->
+									<min_control>-1</min_control>
+									<!--Maximum allowed value for control signal. Used primarily when solving for control values.-->
+									<max_control>1</max_control>
+									<!--Name of the generalized coordinate to which the actuator applies.-->
+									<coordinate>q3</coordinate>
+									<!--The maximum generalized force produced by this actuator.-->
+									<optimal_force>1</optimal_force>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<activation_time_constant>0.010999999999999999</activation_time_constant>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<dactivation_time_constant>0.068000000000000005</dactivation_time_constant>
+									<!--Value of activation in the default state returned by initSystem().-->
+									<default_activation>0</default_activation>
+									<!--Notify 1 if has delp curve, else use optimal force-->
+									<has_delp_curve>1</has_delp_curve>
+									<!--Delp curve filename, file of ang/max biologicl in degrees-->
+									<delp_curve_filename>src/delp5.txt</delp_curve_filename>
+									<!--1 or -1 for velocity factor(ashby)-->
+									<qfac_dir>1</qfac_dir>
+									<!--Maximum velocity in rad/sec if using delp curve-->
+									<max_velocity>20</max_velocity>
+								</DelpActuator>
+								<DelpActuator name="am">
+									<!--Minimum allowed value for control signal. Used primarily when solving for control values.-->
+									<min_control>-1</min_control>
+									<!--Maximum allowed value for control signal. Used primarily when solving for control values.-->
+									<max_control>1</max_control>
+									<!--Name of the generalized coordinate to which the actuator applies.-->
+									<coordinate>q1</coordinate>
+									<!--The maximum generalized force produced by this actuator.-->
+									<optimal_force>1</optimal_force>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<activation_time_constant>0.010999999999999999</activation_time_constant>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<dactivation_time_constant>0.068000000000000005</dactivation_time_constant>
+									<!--Value of activation in the default state returned by initSystem().-->
+									<default_activation>0</default_activation>
+									<!--Notify 1 if has delp curve, else use optimal force-->
+									<has_delp_curve>1</has_delp_curve>
+									<!--Delp curve filename, file of ang/max biologicl in degrees-->
+									<delp_curve_filename>src/delp2.txt</delp_curve_filename>
+									<!--1 or -1 for velocity factor(ashby)-->
+									<qfac_dir>-1</qfac_dir>
+									<!--Maximum velocity in rad/sec if using delp curve-->
+									<max_velocity>16</max_velocity>
+								</DelpActuator>
+								<DelpActuator name="km">
+									<!--Minimum allowed value for control signal. Used primarily when solving for control values.-->
+									<min_control>-1</min_control>
+									<!--Maximum allowed value for control signal. Used primarily when solving for control values.-->
+									<max_control>1</max_control>
+									<!--Name of the generalized coordinate to which the actuator applies.-->
+									<coordinate>q2</coordinate>
+									<!--The maximum generalized force produced by this actuator.-->
+									<optimal_force>1</optimal_force>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<activation_time_constant>0.010999999999999999</activation_time_constant>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<dactivation_time_constant>0.068000000000000005</dactivation_time_constant>
+									<!--Value of activation in the default state returned by initSystem().-->
+									<default_activation>0</default_activation>
+									<!--Notify 1 if has delp curve, else use optimal force-->
+									<has_delp_curve>1</has_delp_curve>
+									<!--Delp curve filename, file of ang/max biologicl in degrees-->
+									<delp_curve_filename>src/delp3.txt</delp_curve_filename>
+									<!--1 or -1 for velocity factor(ashby)-->
+									<qfac_dir>-1</qfac_dir>
+									<!--Maximum velocity in rad/sec if using delp curve-->
+									<max_velocity>18</max_velocity>
+								</DelpActuator>
+								<DelpActuator name="hm">
+									<!--Minimum allowed value for control signal. Used primarily when solving for control values.-->
+									<min_control>-1</min_control>
+									<!--Maximum allowed value for control signal. Used primarily when solving for control values.-->
+									<max_control>1</max_control>
+									<!--Name of the generalized coordinate to which the actuator applies.-->
+									<coordinate>q3</coordinate>
+									<!--The maximum generalized force produced by this actuator.-->
+									<optimal_force>1</optimal_force>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<activation_time_constant>0.010999999999999999</activation_time_constant>
+									<!--Smaller value means activation can change more rapidly (units: seconds).-->
+									<dactivation_time_constant>0.068000000000000005</dactivation_time_constant>
+									<!--Value of activation in the default state returned by initSystem().-->
+									<default_activation>0</default_activation>
+									<!--Notify 1 if has delp curve, else use optimal force-->
+									<has_delp_curve>1</has_delp_curve>
+									<!--Delp curve filename, file of ang/max biologicl in degrees-->
+									<delp_curve_filename>src/delp6.txt</delp_curve_filename>
+									<!--1 or -1 for velocity factor(ashby)-->
+									<qfac_dir>-1</qfac_dir>
+									<!--Maximum velocity in rad/sec if using delp curve-->
+									<max_velocity>20</max_velocity>
+								</DelpActuator>
+							</components>
+							<!--The model's ground reference frame.-->
+							<Ground name="ground">
+								<!--The geometry used to display the axes of this Frame.-->
+								<FrameGeometry name="frame_geometry">
+									<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+									<socket_frame>..</socket_frame>
+									<!--Scale factors in X, Y, Z directions respectively.-->
+									<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+								</FrameGeometry>
+								<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+								<attached_geometry>
+									<Mesh name="ground_geom_1">
+										<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+										<socket_frame>..</socket_frame>
+										<!--Name of geometry file.-->
+										<mesh_file>checkered_floor.vtp</mesh_file>
+									</Mesh>
+								</attached_geometry>
+							</Ground>
+							<!--Acceleration due to gravity, expressed in ground.-->
+							<gravity>0 -9.8100000000000005 0</gravity>
+							<!--Credits (e.g., model author names) associated with the model.-->
+							<credits>barak ostraich</credits>
+							<!--List of bodies that make up this model.-->
+							<BodySet name="bodyset">
+								<objects>
+									<Body name="foot">
+										<!--The geometry used to display the axes of this Frame.-->
+										<FrameGeometry name="frame_geometry">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Scale factors in X, Y, Z directions respectively.-->
+											<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+										</FrameGeometry>
+										<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+										<attached_geometry>
+											<Sphere name="foot_geom_1">
+												<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+												<socket_frame>..</socket_frame>
+												<!--Radius of sphere, defaults to 1.0-->
+												<radius>0.040000000000000001</radius>
+											</Sphere>
+										</attached_geometry>
+										<!--The mass of the body (kg)-->
+										<mass>2.3199999999999998</mass>
+										<!--The location (Vec3) of the mass center in the body frame.-->
+										<mass_center>0 0.094316400000000009 0</mass_center>
+										<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+										<inertia>0.10000000000000001 0.10000000000000001 0.00662 0 0 0</inertia>
+									</Body>
+									<Body name="shank">
+										<!--The geometry used to display the axes of this Frame.-->
+										<FrameGeometry name="frame_geometry">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Scale factors in X, Y, Z directions respectively.-->
+											<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+										</FrameGeometry>
+										<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+										<attached_geometry>
+											<Sphere name="shank_geom_1">
+												<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+												<socket_frame>..</socket_frame>
+												<!--Radius of sphere, defaults to 1.0-->
+												<radius>0.040000000000000001</radius>
+											</Sphere>
+										</attached_geometry>
+										<!--The mass of the body (kg)-->
+										<mass>7.4400000000000004</mass>
+										<!--The location (Vec3) of the mass center in the body frame.-->
+										<mass_center>0 0.23172462000000002 0</mass_center>
+										<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+										<inertia>0.10000000000000001 0.10000000000000001 0.1057 0 0 0</inertia>
+									</Body>
+									<Body name="thigh">
+										<!--The geometry used to display the axes of this Frame.-->
+										<FrameGeometry name="frame_geometry">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Scale factors in X, Y, Z directions respectively.-->
+											<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+										</FrameGeometry>
+										<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+										<attached_geometry>
+											<Sphere name="thigh_geom_1">
+												<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+												<socket_frame>..</socket_frame>
+												<!--Radius of sphere, defaults to 1.0-->
+												<radius>0.040000000000000001</radius>
+											</Sphere>
+										</attached_geometry>
+										<!--The mass of the body (kg)-->
+										<mass>16</mass>
+										<!--The location (Vec3) of the mass center in the body frame.-->
+										<mass_center>0 0.24594324999999997 0</mass_center>
+										<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+										<inertia>0.20000000000000001 0.10000000000000001 0.217584 0 0 0</inertia>
+									</Body>
+									<Body name="HAT">
+										<!--The geometry used to display the axes of this Frame.-->
+										<FrameGeometry name="frame_geometry">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Scale factors in X, Y, Z directions respectively.-->
+											<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+										</FrameGeometry>
+										<!--List of geometry attached to this Frame. Note, the geometry are treated as fixed to the frame and they share the transform of the frame when visualized-->
+										<attached_geometry>
+											<Sphere name="HAT_geom_1">
+												<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+												<socket_frame>..</socket_frame>
+												<!--Radius of sphere, defaults to 1.0-->
+												<radius>0.040000000000000001</radius>
+											</Sphere>
+										</attached_geometry>
+										<!--The mass of the body (kg)-->
+										<mass>54.240000000000002</mass>
+										<!--The location (Vec3) of the mass center in the body frame.-->
+										<mass_center>0 0.3543 0</mass_center>
+										<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+										<inertia>1.1000000000000001 1.1000000000000001 1.48 0 0 0</inertia>
+									</Body>
+									<Body name="PulleyBody1">
+										<!--The geometry used to display the axes of this Frame.-->
+										<FrameGeometry name="frame_geometry">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Scale factors in X, Y, Z directions respectively.-->
+											<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+										</FrameGeometry>
+										<!--Set of wrap objects fixed to this body that GeometryPaths can wrap over.This property used to be a member of Body but was moved up with the introduction of Frames.-->
+										<WrapObjectSet name="wrapobjectset">
+											<objects>
+												<WrapCylinder name="wrap1">
+													<!--The name of quadrant over which the wrap object is active. For example, '+x' or '-y' to set the sidedness of the wrapping.-->
+													<quadrant>-y</quadrant>
+													<!--The radius of the cylinder.-->
+													<radius>0.050000000000000003</radius>
+													<!--The length of the cylinder.-->
+													<length>0.050000000000000003</length>
+												</WrapCylinder>
+											</objects>
+											<groups />
+										</WrapObjectSet>
+										<!--The mass of the body (kg)-->
+										<mass>0.001</mass>
+										<!--The location (Vec3) of the mass center in the body frame.-->
+										<mass_center>0 0 0</mass_center>
+										<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+										<inertia>4.0000000000000007e-06 4.0000000000000007e-06 4.0000000000000007e-06 0 0 0</inertia>
+									</Body>
+									<Body name="PulleyBody2">
+										<!--The geometry used to display the axes of this Frame.-->
+										<FrameGeometry name="frame_geometry">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Scale factors in X, Y, Z directions respectively.-->
+											<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+										</FrameGeometry>
+										<!--Set of wrap objects fixed to this body that GeometryPaths can wrap over.This property used to be a member of Body but was moved up with the introduction of Frames.-->
+										<WrapObjectSet name="wrapobjectset">
+											<objects>
+												<WrapCylinder name="wrap2">
+													<!--The name of quadrant over which the wrap object is active. For example, '+x' or '-y' to set the sidedness of the wrapping.-->
+													<quadrant>-x</quadrant>
+													<!--The radius of the cylinder.-->
+													<radius>0.050000000000000003</radius>
+													<!--The length of the cylinder.-->
+													<length>0.050000000000000003</length>
+												</WrapCylinder>
+											</objects>
+											<groups />
+										</WrapObjectSet>
+										<!--The mass of the body (kg)-->
+										<mass>0.001</mass>
+										<!--The location (Vec3) of the mass center in the body frame.-->
+										<mass_center>0 0 0</mass_center>
+										<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+										<inertia>4.0000000000000007e-06 4.0000000000000007e-06 4.0000000000000007e-06 0 0 0</inertia>
+									</Body>
+									<Body name="PulleyBody3">
+										<!--The geometry used to display the axes of this Frame.-->
+										<FrameGeometry name="frame_geometry">
+											<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+											<socket_frame>..</socket_frame>
+											<!--Scale factors in X, Y, Z directions respectively.-->
+											<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+										</FrameGeometry>
+										<!--Set of wrap objects fixed to this body that GeometryPaths can wrap over.This property used to be a member of Body but was moved up with the introduction of Frames.-->
+										<WrapObjectSet name="wrapobjectset">
+											<objects>
+												<WrapCylinder name="wrap3">
+													<!--The name of quadrant over which the wrap object is active. For example, '+x' or '-y' to set the sidedness of the wrapping.-->
+													<quadrant>-x</quadrant>
+													<!--The radius of the cylinder.-->
+													<radius>0.050000000000000003</radius>
+													<!--The length of the cylinder.-->
+													<length>0.050000000000000003</length>
+												</WrapCylinder>
+											</objects>
+											<groups />
+										</WrapObjectSet>
+										<!--The mass of the body (kg)-->
+										<mass>0.001</mass>
+										<!--The location (Vec3) of the mass center in the body frame.-->
+										<mass_center>0 0 0</mass_center>
+										<!--The elements of the inertia tensor (Vec6) as [Ixx Iyy Izz Ixy Ixz Iyz] measured about the mass_center and not the body origin.-->
+										<inertia>4.0000000000000007e-06 4.0000000000000007e-06 4.0000000000000007e-06 0 0 0</inertia>
+									</Body>
+								</objects>
+								<groups />
+							</BodySet>
+							<!--List of joints that connect the bodies.-->
+							<JointSet name="jointset">
+								<objects>
+									<PinJoint name="tip">
+										<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+										<socket_parent_frame>ground_offset</socket_parent_frame>
+										<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+										<socket_child_frame>foot_offset</socket_child_frame>
+										<!--List containing the generalized coordinates (q's) that parameterize this joint.-->
+										<coordinates>
+											<Coordinate name="q0">
+												<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
+												<default_value>0.52359877559829882</default_value>
+												<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
+												<range>0 3.1415926535897931</range>
+											</Coordinate>
+										</coordinates>
+										<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+										<frames>
+											<PhysicalOffsetFrame name="ground_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/ground</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+											<PhysicalOffsetFrame name="foot_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/foot</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+										</frames>
+									</PinJoint>
+									<PinJoint name="ankle">
+										<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+										<socket_parent_frame>foot_offset</socket_parent_frame>
+										<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+										<socket_child_frame>shank_offset</socket_child_frame>
+										<!--List containing the generalized coordinates (q's) that parameterize this joint.-->
+										<coordinates>
+											<Coordinate name="q1">
+												<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
+												<default_value>-0.87266462599716477</default_value>
+												<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
+												<range>-1.9237223999999999 -0.61471805999999996</range>
+											</Coordinate>
+										</coordinates>
+										<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+										<frames>
+											<PhysicalOffsetFrame name="foot_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/foot</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0.2084 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+											<PhysicalOffsetFrame name="shank_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/shank</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+										</frames>
+									</PinJoint>
+									<PinJoint name="knee">
+										<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+										<socket_parent_frame>shank_offset</socket_parent_frame>
+										<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+										<socket_child_frame>thigh_offset</socket_child_frame>
+										<!--List containing the generalized coordinates (q's) that parameterize this joint.-->
+										<coordinates>
+											<Coordinate name="q2">
+												<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
+												<default_value>0.3490658503988659</default_value>
+												<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
+												<range>0.0078430484000000002 2.4523301000000002</range>
+											</Coordinate>
+										</coordinates>
+										<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+										<frames>
+											<PhysicalOffsetFrame name="shank_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/shank</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0.41820000000000002 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+											<PhysicalOffsetFrame name="thigh_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/thigh</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+										</frames>
+									</PinJoint>
+									<PinJoint name="hip">
+										<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+										<socket_parent_frame>thigh_offset</socket_parent_frame>
+										<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+										<socket_child_frame>HAT_offset</socket_child_frame>
+										<!--List containing the generalized coordinates (q's) that parameterize this joint.-->
+										<coordinates>
+											<Coordinate name="q3">
+												<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
+												<default_value>-0.3490658503988659</default_value>
+												<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
+												<range>-2.0965381999999999 0.17124547000000001</range>
+											</Coordinate>
+										</coordinates>
+										<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+										<frames>
+											<PhysicalOffsetFrame name="thigh_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/thigh</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0.41649999999999998 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+											<PhysicalOffsetFrame name="HAT_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/HAT</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+										</frames>
+									</PinJoint>
+									<WeldJoint name="weld1">
+										<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+										<socket_parent_frame>thigh_offset</socket_parent_frame>
+										<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+										<socket_child_frame>PulleyBody1_offset</socket_child_frame>
+										<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+										<frames>
+											<PhysicalOffsetFrame name="thigh_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/thigh</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+											<PhysicalOffsetFrame name="PulleyBody1_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/PulleyBody1</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+										</frames>
+									</WeldJoint>
+									<WeldJoint name="weld2">
+										<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+										<socket_parent_frame>HAT_offset</socket_parent_frame>
+										<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+										<socket_child_frame>PulleyBody2_offset</socket_child_frame>
+										<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+										<frames>
+											<PhysicalOffsetFrame name="HAT_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/HAT</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+											<PhysicalOffsetFrame name="PulleyBody2_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/PulleyBody2</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+										</frames>
+									</WeldJoint>
+									<WeldJoint name="weld3">
+										<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The parent frame for the joint.).-->
+										<socket_parent_frame>shank_offset</socket_parent_frame>
+										<!--Path to a Component that satisfies the Socket 'child_frame' of type PhysicalFrame (description: The child frame for the joint.).-->
+										<socket_child_frame>PulleyBody3_offset</socket_child_frame>
+										<!--Physical offset frames owned by the Joint that are typically used to satisfy the owning Joint's parent and child frame connections (sockets). PhysicalOffsetFrames are often used to describe the fixed transformation from a Body's origin to another location of interest on the Body (e.g., the joint center). When the joint is deleted, so are the PhysicalOffsetFrame components in this list.-->
+										<frames>
+											<PhysicalOffsetFrame name="shank_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/shank</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+											<PhysicalOffsetFrame name="PulleyBody3_offset">
+												<!--The geometry used to display the axes of this Frame.-->
+												<FrameGeometry name="frame_geometry">
+													<!--Path to a Component that satisfies the Socket 'frame' of type Frame.-->
+													<socket_frame>..</socket_frame>
+													<!--Scale factors in X, Y, Z directions respectively.-->
+													<scale_factors>0.20000000000000001 0.20000000000000001 0.20000000000000001</scale_factors>
+												</FrameGeometry>
+												<!--Path to a Component that satisfies the Socket 'parent' of type C (description: The parent frame to this frame.).-->
+												<socket_parent>/bodyset/PulleyBody3</socket_parent>
+												<!--Translational offset (in meters) of this frame's origin from the parent frame's origin, expressed in the parent frame.-->
+												<translation>0 0 0</translation>
+												<!--Orientation offset (in radians) of this frame in its parent frame, expressed as a frame-fixed x-y-z rotation sequence.-->
+												<orientation>0 0 0</orientation>
+											</PhysicalOffsetFrame>
+										</frames>
+									</WeldJoint>
+								</objects>
+								<groups />
+							</JointSet>
+							<!--Controllers that provide the control inputs for Actuators.-->
+							<ControllerSet name="controllerset">
+								<objects />
+								<groups />
+							</ControllerSet>
+							<!--Forces in the model (includes Actuators).-->
+							<ForceSet name="forceset">
+								<objects>
+									<PathSpring name="path_spring1">
+										<!--The GeometryPath defines the set of points and wrapping surfaceinteractions that form the path of action of the PathSpring-->
+										<GeometryPath name="geometrypath">
+											<!--The set of points defining the path-->
+											<PathPointSet>
+												<objects>
+													<PathPoint name="origin1">
+														<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+														<socket_parent_frame>/bodyset/thigh</socket_parent_frame>
+														<!--The fixed location of the path point expressed in its parent frame.-->
+														<location>0.050000000000000003 0.20000000000000001 0</location>
+													</PathPoint>
+													<PathPoint name="insert1">
+														<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+														<socket_parent_frame>/bodyset/shank</socket_parent_frame>
+														<!--The fixed location of the path point expressed in its parent frame.-->
+														<location>0.050000000000000003 0.21820000000000001 0</location>
+													</PathPoint>
+												</objects>
+												<groups />
+											</PathPointSet>
+											<!--The wrap objects that are associated with this path-->
+											<PathWrapSet>
+												<objects>
+													<PathWrap name="pathwrap">
+														<!--A WrapObject that this PathWrap interacts with.-->
+														<wrap_object>wrap1</wrap_object>
+														<!--The wrapping method used to solve the path around the wrap object.-->
+														<method>hybrid</method>
+													</PathWrap>
+												</objects>
+												<groups />
+											</PathWrapSet>
+											<!--Default appearance attributes for this GeometryPath-->
+											<Appearance>
+												<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+												<color>0 1 0</color>
+											</Appearance>
+										</GeometryPath>
+										<!--The resting length (m) of the PathSpring-->
+										<resting_length>0.40000000000000002</resting_length>
+										<!--The linear stiffness (N/m) of the PathSpring-->
+										<stiffness>0</stiffness>
+										<!--The dissipation factor (s/m) of the PathSpring-->
+										<dissipation>0.01</dissipation>
+									</PathSpring>
+									<PathSpring name="path_spring2">
+										<!--The GeometryPath defines the set of points and wrapping surfaceinteractions that form the path of action of the PathSpring-->
+										<GeometryPath name="geometrypath">
+											<!--The set of points defining the path-->
+											<PathPointSet>
+												<objects>
+													<PathPoint name="origin2">
+														<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+														<socket_parent_frame>/bodyset/HAT</socket_parent_frame>
+														<!--The fixed location of the path point expressed in its parent frame.-->
+														<location>-0.050000000000000003 0.20000000000000001 0</location>
+													</PathPoint>
+													<PathPoint name="insert2">
+														<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+														<socket_parent_frame>/bodyset/thigh</socket_parent_frame>
+														<!--The fixed location of the path point expressed in its parent frame.-->
+														<location>-0.050000000000000003 0.21649999999999997 0</location>
+													</PathPoint>
+												</objects>
+												<groups />
+											</PathPointSet>
+											<!--The wrap objects that are associated with this path-->
+											<PathWrapSet>
+												<objects>
+													<PathWrap name="pathwrap">
+														<!--A WrapObject that this PathWrap interacts with.-->
+														<wrap_object>wrap2</wrap_object>
+														<!--The wrapping method used to solve the path around the wrap object.-->
+														<method>hybrid</method>
+													</PathWrap>
+												</objects>
+												<groups />
+											</PathWrapSet>
+											<!--Default appearance attributes for this GeometryPath-->
+											<Appearance>
+												<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+												<color>0 1 0</color>
+											</Appearance>
+										</GeometryPath>
+										<!--The resting length (m) of the PathSpring-->
+										<resting_length>0.40000000000000002</resting_length>
+										<!--The linear stiffness (N/m) of the PathSpring-->
+										<stiffness>0</stiffness>
+										<!--The dissipation factor (s/m) of the PathSpring-->
+										<dissipation>0.01</dissipation>
+									</PathSpring>
+									<PathSpring name="path_spring3">
+										<!--The GeometryPath defines the set of points and wrapping surfaceinteractions that form the path of action of the PathSpring-->
+										<GeometryPath name="geometrypath">
+											<!--The set of points defining the path-->
+											<PathPointSet>
+												<objects>
+													<PathPoint name="origin3">
+														<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+														<socket_parent_frame>/bodyset/shank</socket_parent_frame>
+														<!--The fixed location of the path point expressed in its parent frame.-->
+														<location>-0.050000000000000003 0.20000000000000001 0</location>
+													</PathPoint>
+													<PathPoint name="insert3">
+														<!--Path to a Component that satisfies the Socket 'parent_frame' of type PhysicalFrame (description: The frame in which this path point is defined.).-->
+														<socket_parent_frame>/bodyset/foot</socket_parent_frame>
+														<!--The fixed location of the path point expressed in its parent frame.-->
+														<location>-0.050000000000000003 0.1084 0</location>
+													</PathPoint>
+												</objects>
+												<groups />
+											</PathPointSet>
+											<!--The wrap objects that are associated with this path-->
+											<PathWrapSet>
+												<objects>
+													<PathWrap name="pathwrap">
+														<!--A WrapObject that this PathWrap interacts with.-->
+														<wrap_object>wrap3</wrap_object>
+														<!--The wrapping method used to solve the path around the wrap object.-->
+														<method>hybrid</method>
+													</PathWrap>
+												</objects>
+												<groups />
+											</PathWrapSet>
+											<!--Default appearance attributes for this GeometryPath-->
+											<Appearance>
+												<!--The color, (red, green, blue), [0, 1], used to display the geometry. -->
+												<color>0 1 0</color>
+											</Appearance>
+										</GeometryPath>
+										<!--The resting length (m) of the PathSpring-->
+										<resting_length>0.29999999999999999</resting_length>
+										<!--The linear stiffness (N/m) of the PathSpring-->
+										<stiffness>0</stiffness>
+										<!--The dissipation factor (s/m) of the PathSpring-->
+										<dissipation>0.01</dissipation>
+									</PathSpring>
+								</objects>
+								<groups />
+							</ForceSet>
+						</Model>
+					</model>
+				</ModelProcessor>
+				<!--Bounds on initial value.-->
+				<MocoInitialBounds name="time_initial_bounds">
+					<!--1 value: required value. 2 values: lower, upper bounds on value.-->
+					<bounds>0</bounds>
+				</MocoInitialBounds>
+				<!--Bounds on final value.-->
+				<MocoFinalBounds name="time_final_bounds">
+					<!--1 value: required value. 2 values: lower, upper bounds on value.-->
+					<bounds>0.34999999999999998 0.65000000000000002</bounds>
+				</MocoFinalBounds>
+				<!--The state variables' bounds.-->
+				<state_infos>
+					<MocoVariableInfo name="/jointset/tip/q0/value">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>0.52359877559829882 1.5707963267948966</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>0.52359877559829882</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds>0.52359877559829882 1.5707963267948966</final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/jointset/ankle/q1/value">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>-1.9192304 -0.60879859999999997</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>-0.87266462599716477</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds>-1.9192304 -0.60879859999999997</final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/jointset/knee/q2/value">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>-0.0092206074000000006 2.4434610000000001</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>0.3490658503988659</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds>-0.0092206074000000006 2.4434610000000001</final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/jointset/hip/q3/value">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>-2.0952071000000001 0.17133107</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>-0.3490658503988659</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds>-2.0952071000000001 0.17133107</final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/ap/activation">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>0 1</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>0</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds>0 1</final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/kp/activation">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>0 1</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>0</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds>0 1</final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/hp/activation">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>0 1</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>0</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds>0 1</final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/am/activation">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>-1 0</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>0</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds>-1 0</final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/km/activation">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>-1 0</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>0</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds>-1 0</final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/hm/activation">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>-1 0</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>0</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds>-1 0</final_bounds>
+					</MocoVariableInfo>
+				</state_infos>
+				<!--Set state variable bounds for all states matching a regular expression.-->
+				<state_infos_pattern>
+					<MocoVariableInfo name="/jointset/.*/speed">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>-55 55</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds>0</initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds></final_bounds>
+					</MocoVariableInfo>
+				</state_infos_pattern>
+				<!--The control variables' bounds.-->
+				<control_infos>
+					<MocoVariableInfo name="/ap">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>0 1</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds></initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds></final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/kp">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>0 1</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds></initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds></final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/hp">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>0 1</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds></initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds></final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/am">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>-1 0</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds></initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds></final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/km">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>-1 0</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds></initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds></final_bounds>
+					</MocoVariableInfo>
+					<MocoVariableInfo name="/hm">
+						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
+						<bounds>-1 0</bounds>
+						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
+						<initial_bounds></initial_bounds>
+						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
+						<final_bounds></final_bounds>
+					</MocoVariableInfo>
+				</control_infos>
+				<!--Parameter variables (model properties) to optimize.-->
+				<parameters>
+					<MocoParameter name="knee stiffness">
+						<!--Bounds over all time.-->
+						<MocoBounds>
+							<!--1 value: required value. 2 values: lower, upper bounds on value.-->
+							<bounds>0 0</bounds>
+						</MocoBounds>
+						<!--The path to the model component that owns the property associated with the MocoParameter.-->
+						<component_paths>/forceset/path_spring1</component_paths>
+						<!--The name of the model property associated with the MocoParameter.-->
+						<property_name>stiffness</property_name>
+					</MocoParameter>
+					<MocoParameter name="hip stiffness">
+						<!--Bounds over all time.-->
+						<MocoBounds>
+							<!--1 value: required value. 2 values: lower, upper bounds on value.-->
+							<bounds>0 0</bounds>
+						</MocoBounds>
+						<!--The path to the model component that owns the property associated with the MocoParameter.-->
+						<component_paths>/forceset/path_spring2</component_paths>
+						<!--The name of the model property associated with the MocoParameter.-->
+						<property_name>stiffness</property_name>
+					</MocoParameter>
+					<MocoParameter name="ankle stiffness">
+						<!--Bounds over all time.-->
+						<MocoBounds>
+							<!--1 value: required value. 2 values: lower, upper bounds on value.-->
+							<bounds>0 0</bounds>
+						</MocoBounds>
+						<!--The path to the model component that owns the property associated with the MocoParameter.-->
+						<component_paths>/forceset/path_spring3</component_paths>
+						<!--The name of the model property associated with the MocoParameter.-->
+						<property_name>stiffness</property_name>
+					</MocoParameter>
+				</parameters>
+				<!--Integral/endpoint quantities to minimize or constrain.-->
+				<goals>
+					<MocoJumpGoal name="Jump">
+						<!--All properties of this object have their default values.-->
+					</MocoJumpGoal>
+					<MocoFinalTimeGoal name="Time">
+						<!--In cost mode, the goal is multiplied by this weight (default: 1).-->
+						<weight>0.5</weight>
+					</MocoFinalTimeGoal>
+				</goals>
+			</MocoPhase>
+		</MocoProblem>
+		<!--The optimal control algorithm for solving the problem.-->
+		<MocoCasADiSolver name="solver">
+			<!--The number of uniformly-sized mesh intervals for the problem (default: 100). If a non-uniform mesh exists, the non-uniform mesh is used instead.-->
+			<num_mesh_intervals>80</num_mesh_intervals>
+			<!--The optimization solver to use (default: ipopt).-->
+			<optim_solver>ipopt</optim_solver>
+			<!--Maximum number of iterations in the optimization solver (-1 for solver's default).-->
+			<optim_max_iterations>9000</optim_max_iterations>
+			<!--Tolerance used to determine if the objective is minimized (-1 for solver's default)-->
+			<optim_convergence_tolerance>0.001</optim_convergence_tolerance>
+			<!--Tolerance used to determine if the constraints are satisfied (-1 for solver's default)-->
+			<optim_constraint_tolerance>0.001</optim_constraint_tolerance>
+			<!--Do some MocoParameters in the problem require invoking initSystem() to take effect properly? This substantialy slows down problems with parameter variables (default: true).-->
+			<parameters_require_initsystem>false</parameters_require_initsystem>
+			<!--The finite difference scheme CasADi will use to calculate problem derivatives (default: 'central').-->
+			<optim_finite_difference_scheme>forward</optim_finite_difference_scheme>
+		</MocoCasADiSolver>
+	</MocoStudy>
+</OpenSimDocument>
