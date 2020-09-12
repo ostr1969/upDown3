@@ -29,12 +29,12 @@ public:
     void handleEvent(const State& state) const override {
         Vector_<SpatialVec>  forcesAtMInG;
         system.realize(state, Stage::Acceleration);
-	
+	//SimbodyMatterSubsystem matter=system.getMatterSubsystem();
         system.getMatterSubsystem().calcMobilizerReactionForces( state,forcesAtMInG);
         SimTK::Vec3 comPos =
                 system.getMatterSubsystem().calcSystemMassCenterLocationInGround(state);
-        Vec3 COM_v = system.getMatterSubsystem().
-                        calcSystemMassCenterVelocityInGround(state);
+        Vec3 COM_v = system.getMatterSubsystem().calcSystemMassCenterVelocityInGround(state);
+	double totEne=system.calcEnergy(state);
 
 
 
@@ -54,19 +54,35 @@ public:
 	double P4=act4->getPower(state);
 	double P5=act5->getPower(state);
 	double P6=act6->getPower(state);
+	 PathSpring* spK = dynamic_cast<PathSpring*>(&_fset.get(0));
+	 PathSpring* spH = dynamic_cast<PathSpring*>(&_fset.get(1));
+	 PathSpring* spA = dynamic_cast<PathSpring*>(&_fset.get(2));
+        double springTK=spK->getTension(state)*0.05;//torque knee
+	double spPK=spK->getLengtheningSpeed(state)*spK->getTension(state);//w*tou=Power
+	double spEK=0.5*spK->getStretch(state)*spK->getStretch(state)*
+			spK->getStiffness();
+        //double spEK2=spK->computePotentialEnergy(state);
+        double springTH=spH->getTension(state)*0.05;//hip
+	double spPH=spH->getLengtheningSpeed(state)*spH->getTension(state);
+	double spEH=0.5*spH->getStretch(state)*spH->getStretch(state)*
+			spH->getStiffness();
+        double springTA=spA->getTension(state)*0.05;//ankle
+	double spPA=spA->getLengtheningSpeed(state)*spA->getTension(state);
+	double spEA=0.5*spA->getStretch(state)*spA->getStretch(state)*
+			spA->getStiffness();
 
         Log1<< state.getTime()<<","<<q(1)<<","<<u(1)<<","<<act1->getControl(state)<<
         ","<<act1->getDelpVars(state,0)<<","<<act1->getDelpVars(state,1)<<","
         <<act1->getDelpVars(state,2)<<","<<act1->getDelpVars(state,3)
-        <<","<<P1<<","<<act1->get_coordinate()<<endl;
+        <<","<<P1<<","<<act1->get_coordinate()<<","<<springTA<<","<<spPA<<endl;
         Log2<< state.getTime()<<","<<q(2)<<","<<u(2)<<","<<act2->getControl(state)<<
         ","<<act2->getDelpVars(state,0)<<","<<act2->getDelpVars(state,1)<<","
         <<act2->getDelpVars(state,2)<<","<<act2->getDelpVars(state,3)
-        <<","<<P2<<","<<act2->get_coordinate()<<endl;
+        <<","<<P2<<","<<act2->get_coordinate()<<","<<springTK<<","<<spPK<<endl;
         Log3<< state.getTime()<<","<<q(3)<<","<<u(3)<<","<<act3->getControl(state)<<
         ","<<act3->getDelpVars(state,0)<<","<<act3->getDelpVars(state,1)<<","
         <<act3->getDelpVars(state,2)<<","<<act3->getDelpVars(state,3)
-        <<","<<P3<<","<<act3->get_coordinate()<<endl;
+        <<","<<P3<<","<<act3->get_coordinate()<<","<<springTH<<","<<spPH<<endl;
         Log4<< state.getTime()<<","<<q(1)<<","<<u(1)<<","<<act4->getControl(state)<<
         ","<<act4->getDelpVars(state,0)<<","<<act4->getDelpVars(state,1)<<","
         <<act4->getDelpVars(state,2)<<","<<act4->getDelpVars(state,3)
@@ -82,7 +98,6 @@ public:
 	double T1=act1->getDelpVars(state,0)+act4->getDelpVars(state,0);
 	double T2=act2->getDelpVars(state,0)+act5->getDelpVars(state,0);
 	double T3=act3->getDelpVars(state,0)+act6->getDelpVars(state,0);
-	 PathSpring* sp = dynamic_cast<PathSpring*>(&_fset.get(0));
 	 /*CoordinateLimitForce* limf1 = dynamic_cast<CoordinateLimitForce*>(&_fset.get(1));
 	 CoordinateLimitForce* limf2 = dynamic_cast<CoordinateLimitForce*>(&_fset.get(2));
 	 CoordinateLimitForce* limf3 = dynamic_cast<CoordinateLimitForce*>(&_fset.get(3));
@@ -91,21 +106,22 @@ public:
          double limPow2=limf2->getPowerDissipation(state);
          double limPow3=limf3->getPowerDissipation(state);
          double limPow4=limf4->getPowerDissipation(state);*/
-        double springT=sp->getTension(state)*0.05;
-	double spP=sp->getLengtheningSpeed(state)*sp->getTension(state);
 	//double spE=0.5*sp->getStiffness()*sp->getStretch(state)*sp->getStretch(state);
 
         LogA<<state.getTime()<<","<<
 	      q(0)<<","<<q(1)<<","<<q(2)<<","<<q(3)<<","<<
               u(0)<<","<<u(1)<<","<<u(2)<<","<<u(3)<<","<<
-	      T1<<","<<T2<<","<<T3<<","<<springT<<","<<
+	      T1<<","<<T2<<","<<T3<<","<<springTA<<","<<springTK<<","<<
+	      springTH<<","<<
 	      P1+P4<<","<<P2+P5<<","<<P3+P6<<","<<
-		spP<<","<<
+		spPA<<","<<spPK<<","<<spPH<<","<<
+		spEA<<","<<spEK<<","<<spEH<<","<<
 	//	limPow1<<","<<limPow2<<","<<limPow3<<","<<limPow4<<","<<
-		comPos(1)<<","<<COM_v(1)<<
-		endl;	      
-        std::cout << state.getTime() << "\t," << forcesAtMInG[0][1][1] 
-		<<"\t,"<< comPos(1)<< "\t,"<<endl; 
+		comPos(1)<<","<<COM_v(0)<<","<<COM_v(1)<<","<<forcesAtMInG[0][1][1]<<
+		","<<totEne<<endl;	      
+       // std::cout << state.getTime() << "\t," << forcesAtMInG[0][1][1] 
+	//	<<"\t,"<< comPos(1)<< "\t,"<<endl; 
+	//
 	//	limf1->computePotentialEnergy(state)<<
 	//	","<< limf2->computePotentialEnergy(state)<<","
 	//	<< limf3->computePotentialEnergy(state)<<","
@@ -125,13 +141,13 @@ ofstream fwddebugLog("results/fwd_debug.csv", ofstream::out);
 //
 int main(int argc, char *argv[]){
 	InpVars data=readvars();
-    Log1<<"t,ang,vel,E,tou,act,fac,opt,power,coord\n";
-    Log2<<"t,ang,vel,E,tou,act,fac,opt,power,coord\n";
-    Log3<<"t,ang,vel,E,tou,act,fac,opt,power,coord\n";
+    Log1<<"t,ang,vel,E,tou,act,fac,opt,power,coord,spT,spP\n";
+    Log2<<"t,ang,vel,E,tou,act,fac,opt,power,coord,spT,spP\n";
+    Log3<<"t,ang,vel,E,tou,act,fac,opt,power,coord,spT,spP\n";
     Log4<<"t,ang,vel,E,tou,act,fac,opt,power,coord\n";
     Log5<<"t,ang,vel,E,tou,act,fac,opt,power,coord\n";
     Log6<<"t,ang,vel,E,tou,act,fac,opt,power,coord\n";
-    LogA<<"t,ang1,ang2,ang3,ang4,v1,v2,v3,v4,T2,T3,T4,Tsp,P2,P3,P4,spP,y,vy\n";
+    LogA<<"t,ang1,ang2,ang3,ang4,v1,v2,v3,v4,TA,TK,TH,TspA,TspK,TspH,PA,PK,PH,spPA,spPK,spPH,spEA,spEK,spEH,y,vx,vy,Fy,totE\n";
     //LogA<<"t,ang1,ang2,ang3,ang4,v1,v2,v3,v4,T2,T3,T4,Tsp,P2,P3,P4,spP,limP1,limP2,limP3,limP4,y,vy\n";
 
 	for (int i=0;i<2;i++) 
@@ -141,6 +157,11 @@ int main(int argc, char *argv[]){
 	for (int i=0;i<data.doubles.size();i++) 
 		cout<<data.doubles[i].label<<":"<<data.doubles[i].val<<endl;	
 	string modelFile="results/mycolo_initial.osim";
+	string mocofile="results/mycolo_traj.sto";
+        TimeSeriesTable mocoTable(mocofile);
+        RowVectorView row0=mocoTable.getRowAtIndex(0);
+        int len=row0.size();
+	cout<<"moco springs(KHA):"<<row0(len-3)<<","<<row0(len-2)<<","<<row0(len-1)<<endl;
         //string controlsfile="mycolo_controls.sto";
         string statesFile="results/mycolo_states.bin";
 	string controlsFile="results/mycolo_controls.bin";
@@ -189,13 +210,16 @@ int main(int argc, char *argv[]){
     osimModel.addController(controller);
 	
         State &si = osimModel.initSystem();
+// 1=knee 2=hip 3=ankle
         auto& sp1=osimModel.updComponent<PathSpring>("/forceset/path_spring1");
-	int spnum=round(sp1.getStiffness()/4454.76);
-        sp1.setStiffness(6*4454);
+        sp1.setStiffness(row0(len-3));
+	int spnum1=round(sp1.getStiffness()/4454.76);
         auto& sp2=osimModel.updComponent<PathSpring>("/forceset/path_spring2");
-        sp2.setStiffness(6*4454);
+        sp2.setStiffness(row0(len-2));
+	int spnum2=round(sp2.getStiffness()/4454.76);
         auto& sp3=osimModel.updComponent<PathSpring>("/forceset/path_spring3");
-        sp3.setStiffness(6*4454);
+        sp3.setStiffness(row0(len-1));
+	int spnum3=round(sp3.getStiffness()/4454.76);
         auto& fset=osimModel.updForceSet();
 	/* CoordinateLimitForce* limf1 = dynamic_cast<CoordinateLimitForce*>(&fset.get(1));
 	 CoordinateLimitForce* limf2 = dynamic_cast<CoordinateLimitForce*>(&fset.get(2));
@@ -206,7 +230,7 @@ int main(int argc, char *argv[]){
          limf3->set_compute_dissipation_energy(true);
          limf4->set_compute_dissipation_energy(true);*/
 	const MultibodySystem& system=osimModel.updMultibodySystem();
-        system.addEventReporter(new MyReporter(system,.005,controller,fset));
+        system.addEventReporter(new MyReporter(system,.0005,controller,fset));
         State &osimState = osimModel.initializeState();
 	//set initial state from first line of statesfile
 	cout<<"apply first line of states...."<<endl;
@@ -226,10 +250,10 @@ int main(int argc, char *argv[]){
         manager.initialize(osimState);
 
         std::cout<<"Integrating from 0  to " << tf << std::endl;
-        manager.setIntegratorAccuracy(1.0e-4);
+        manager.setIntegratorAccuracy(0.5e-4);
         cout<<"minStep:"<<tf/((time.nrow()-1))<<endl;
 	//manager.setIntegratorMinimumStepSize(.015);
-	manager.setIntegratorMaximumStepSize(tf/300);
+	manager.setIntegratorMaximumStepSize(tf/1000);
         osimModel.print("results/fwd_integ.osim");
 
         manager.integrate(tf);
@@ -243,12 +267,15 @@ int main(int argc, char *argv[]){
 		<< "\t,"<<comPos[1]<<  std::endl;
 
         cout<<"end integration at time:"<<manager.getState().getTime()<<endl;
+
         osimModel.getMultibodySystem().realize(manager.getState(), Stage::Velocity);
         Vec3 COM_position = osimModel.getMultibodySystem().getMatterSubsystem().
                         calcSystemMassCenterLocationInGround(manager.getState());
         Vec3 COM_velocity = osimModel.getMultibodySystem().getMatterSubsystem().
                         calcSystemMassCenterVelocityInGround(manager.getState());
         double g = -osimModel.getGravity()[1];
+	double sysMass =  osimModel.getMultibodySystem().getMatterSubsystem()
+					.calcSystemMass(manager.getState());
 
         double maxHeight = (COM_velocity[1]>0?COM_position[1] +
                                 pow(COM_velocity[1], 2.0)/(2.0*g):0);
@@ -259,8 +286,8 @@ int main(int argc, char *argv[]){
 	const Set<const Actuator>& actSet = osimModel.get_ControllerSet().get(0).getActuatorSet();
 
         //cout.precision(15);
-        cout<<"num of springs:"<<spnum<<endl;
-	cout<<"pos:"<<COM_position<<" vel:"<<COM_velocity<<endl;
+        cout<<"num of springs:[KHA]"<<spnum1<<","<<spnum2<<","<<spnum3<<endl;
+	cout<<"pos:"<<COM_position<<" vel:"<<COM_velocity<<" mass:"<<sysMass<<endl;
 	cout<<"jump:"<<maxHeight<<endl;
                 
 

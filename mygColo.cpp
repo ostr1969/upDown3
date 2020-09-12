@@ -190,7 +190,7 @@ MocoParameter p0;
 p0.setName("knee stiffness");
 p0.appendComponentPath("/forceset/path_spring1");
 p0.setPropertyName("stiffness");
-MocoBounds massBounds(00000, 6*4454);
+MocoBounds massBounds(00000, data.ints[6].val*4454.);
 p0.setBounds(massBounds);
 problem.addParameter(p0);
 
@@ -198,16 +198,16 @@ MocoParameter p1;
 p1.setName("hip stiffness");
 p1.appendComponentPath("/forceset/path_spring2");
 p1.setPropertyName("stiffness");
-MocoBounds massBounds1(00000, 6*4454);
-p1.setBounds(massBounds);
+MocoBounds massBounds1(00000,  data.ints[7].val*4454.);
+p1.setBounds(massBounds1);
 problem.addParameter(p1);
 
 MocoParameter p2;
 p2.setName("ankle stiffness");
 p2.appendComponentPath("/forceset/path_spring3");
 p2.setPropertyName("stiffness");
-MocoBounds massBounds2(00000, 6*4454);
-p2.setBounds(massBounds);
+MocoBounds massBounds2(00000,  data.ints[8].val*4454.);
+p2.setBounds(massBounds2);
 problem.addParameter(p2);
     // Cost.
     // -----
@@ -235,7 +235,6 @@ problem.addParameter(p2);
     // Now that we've finished setting up the tool, print it to a file.
     study.print("results/mycolo.omoco");
     //solver.setGuessFile(data.strings[2].val);
-
     // Solve the problem.
     // ==================
     MocoSolution solution = study.solve();
