@@ -1,5 +1,5 @@
 i iterations 9000
-i timediv 80 
+i timediv 100 
 s modelfile src/base3springs.osim
 s finite_difference_scheme forward
 d timemax 0.65
@@ -15,6 +15,6 @@ d initial_q3 -20
 s guessfile src/colotraj4.sto
 i num_of_springs_hip 0
 i num_of_springs_ankle 0
-i max_num_of_springs_knee 0
+i max_num_of_springs_knee 20
 i max_num_of_springs_hip 0
 i max_num_of_springs_ankle 0

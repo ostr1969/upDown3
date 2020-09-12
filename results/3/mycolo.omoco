@@ -1173,7 +1173,7 @@
 						<!--Bounds over all time.-->
 						<MocoBounds>
 							<!--1 value: required value. 2 values: lower, upper bounds on value.-->
-							<bounds>0 66810</bounds>
+							<bounds>0 89080</bounds>
 						</MocoBounds>
 						<!--The path to the model component that owns the property associated with the MocoParameter.-->
 						<component_paths>/forceset/path_spring3</component_paths>
@@ -1196,7 +1196,7 @@
 		<!--The optimal control algorithm for solving the problem.-->
 		<MocoCasADiSolver name="solver">
 			<!--The number of uniformly-sized mesh intervals for the problem (default: 100). If a non-uniform mesh exists, the non-uniform mesh is used instead.-->
-			<num_mesh_intervals>80</num_mesh_intervals>
+			<num_mesh_intervals>100</num_mesh_intervals>
 			<!--The optimization solver to use (default: ipopt).-->
 			<optim_solver>ipopt</optim_solver>
 			<!--Maximum number of iterations in the optimization solver (-1 for solver's default).-->

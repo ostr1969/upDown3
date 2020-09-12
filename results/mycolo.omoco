@@ -1151,7 +1151,7 @@
 						<!--Bounds over all time.-->
 						<MocoBounds>
 							<!--1 value: required value. 2 values: lower, upper bounds on value.-->
-							<bounds>0 111350</bounds>
+							<bounds>0 89080</bounds>
 						</MocoBounds>
 						<!--The path to the model component that owns the property associated with the MocoParameter.-->
 						<component_paths>/forceset/path_spring1</component_paths>
@@ -1162,7 +1162,7 @@
 						<!--Bounds over all time.-->
 						<MocoBounds>
 							<!--1 value: required value. 2 values: lower, upper bounds on value.-->
-							<bounds>0 111350</bounds>
+							<bounds>0 0</bounds>
 						</MocoBounds>
 						<!--The path to the model component that owns the property associated with the MocoParameter.-->
 						<component_paths>/forceset/path_spring2</component_paths>
@@ -1173,7 +1173,7 @@
 						<!--Bounds over all time.-->
 						<MocoBounds>
 							<!--1 value: required value. 2 values: lower, upper bounds on value.-->
-							<bounds>0 111350</bounds>
+							<bounds>0 0</bounds>
 						</MocoBounds>
 						<!--The path to the model component that owns the property associated with the MocoParameter.-->
 						<component_paths>/forceset/path_spring3</component_paths>

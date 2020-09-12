@@ -119,8 +119,8 @@ public:
 	//	limPow1<<","<<limPow2<<","<<limPow3<<","<<limPow4<<","<<
 		comPos(1)<<","<<COM_v(0)<<","<<COM_v(1)<<","<<forcesAtMInG[0][1][1]<<
 		","<<totEne<<endl;	      
-       // std::cout << state.getTime() << "\t," << forcesAtMInG[0][1][1] 
-	//	<<"\t,"<< comPos(1)<< "\t,"<<endl; 
+        std::cout << state.getTime() << "\t," << forcesAtMInG[0][1][1] 
+		<<"\t,"<< comPos(1)<< "\t,"<<endl; 
 	//
 	//	limf1->computePotentialEnergy(state)<<
 	//	","<< limf2->computePotentialEnergy(state)<<","
