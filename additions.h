@@ -161,17 +161,17 @@ double fwdCheck(Model &osimModel ,MocoTrajectory solution){
         Array<string> labs=results.getColumnLabels();
          cout<<"getdata..."<<endl;
 	Array<double>& st=state->getData();
-        double s1=solution.getParameter("knee stiffness");
-        double s2=solution.getParameter("hip stiffness");
-        double s3=solution.getParameter("ankle stiffness");
+        //double s1=solution.getParameter("knee stiffness");
+        //double s2=solution.getParameter("hip stiffness");
+        //double s3=solution.getParameter("ankle stiffness");
 	//osimModel.printSubcomponentInfo();
 	auto& sp1=osimModel.updComponent<PathSpring>("/forceset/path_spring1");
         cout<<"rss"<<endl;
-        sp1.setStiffness(s1);
+        //sp1.setStiffness(s1);
 	auto& sp2=osimModel.updComponent<PathSpring>("/forceset/path_spring2");
-        sp1.setStiffness(s2);
+        //sp1.setStiffness(s2);
 	auto& sp3=osimModel.updComponent<PathSpring>("/forceset/path_spring3");
-        sp1.setStiffness(s3);
+        //sp1.setStiffness(s3);
 
 	//for (int i=1; i<=st.getSize();i++)
 	//cout<<labs[i]<<":"<<st[i-1]<<endl;

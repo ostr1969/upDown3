@@ -535,7 +535,7 @@
 										<coordinates>
 											<Coordinate name="q0">
 												<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
-												<default_value>0.52359877559829882</default_value>
+												<default_value>1.3962634015954636</default_value>
 												<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
 												<range>0 3.1415926535897931</range>
 											</Coordinate>
@@ -583,7 +583,7 @@
 										<coordinates>
 											<Coordinate name="q1">
 												<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
-												<default_value>-0.87266462599716477</default_value>
+												<default_value>-1.5707963267948966</default_value>
 												<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
 												<range>-1.9237223999999999 -0.61471805999999996</range>
 											</Coordinate>
@@ -631,7 +631,7 @@
 										<coordinates>
 											<Coordinate name="q2">
 												<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
-												<default_value>0.3490658503988659</default_value>
+												<default_value>0.43633231299858238</default_value>
 												<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
 												<range>0.0078430484000000002 2.4523301000000002</range>
 											</Coordinate>
@@ -679,7 +679,7 @@
 										<coordinates>
 											<Coordinate name="q3">
 												<!--The value of this coordinate before any value has been set. Rotational coordinate value is in radians and Translational in meters.-->
-												<default_value>-0.3490658503988659</default_value>
+												<default_value>-0.43633231299858238</default_value>
 												<!--The minimum and maximum values that the coordinate can range between. Rotational coordinate range in radians and Translational in meters.-->
 												<range>-2.0965381999999999 0.17124547000000001</range>
 											</Coordinate>
@@ -934,7 +934,7 @@
 										<!--The resting length (m) of the PathSpring-->
 										<resting_length>0.40000000000000002</resting_length>
 										<!--The linear stiffness (N/m) of the PathSpring-->
-										<stiffness>0</stiffness>
+										<stiffness>8909.5200000000004</stiffness>
 										<!--The dissipation factor (s/m) of the PathSpring-->
 										<dissipation>0.01</dissipation>
 									</PathSpring>
@@ -998,7 +998,7 @@
 				<!--Bounds on final value.-->
 				<MocoFinalBounds name="time_final_bounds">
 					<!--1 value: required value. 2 values: lower, upper bounds on value.-->
-					<bounds>0.34999999999999998 0.65000000000000002</bounds>
+					<bounds>0.34999999999999998 0.69999999999999996</bounds>
 				</MocoFinalBounds>
 				<!--The state variables' bounds.-->
 				<state_infos>
@@ -1006,7 +1006,7 @@
 						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
 						<bounds>0.52359877559829882 1.5707963267948966</bounds>
 						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
-						<initial_bounds>0.52359877559829882</initial_bounds>
+						<initial_bounds>1.3962634015954636</initial_bounds>
 						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
 						<final_bounds>0.52359877559829882 1.5707963267948966</final_bounds>
 					</MocoVariableInfo>
@@ -1014,7 +1014,7 @@
 						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
 						<bounds>-1.9192304 -0.60879859999999997</bounds>
 						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
-						<initial_bounds>-0.87266462599716477</initial_bounds>
+						<initial_bounds>-1.5707963267948966</initial_bounds>
 						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
 						<final_bounds>-1.9192304 -0.60879859999999997</final_bounds>
 					</MocoVariableInfo>
@@ -1022,7 +1022,7 @@
 						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
 						<bounds>-0.0092206074000000006 2.4434610000000001</bounds>
 						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
-						<initial_bounds>0.3490658503988659</initial_bounds>
+						<initial_bounds>0.43633231299858238</initial_bounds>
 						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
 						<final_bounds>-0.0092206074000000006 2.4434610000000001</final_bounds>
 					</MocoVariableInfo>
@@ -1030,7 +1030,7 @@
 						<!--1 value: required value over all time. 2 values: lower, upper bounds on value over all time.-->
 						<bounds>-2.0952071000000001 0.17133107</bounds>
 						<!--1 value: required initial value. 2 values: lower, upper bounds on initial value.-->
-						<initial_bounds>-0.3490658503988659</initial_bounds>
+						<initial_bounds>-0.43633231299858238</initial_bounds>
 						<!--1 value: required final value. 2 values: lower, upper bounds on final value.-->
 						<final_bounds>-2.0952071000000001 0.17133107</final_bounds>
 					</MocoVariableInfo>
@@ -1145,62 +1145,22 @@
 						<final_bounds></final_bounds>
 					</MocoVariableInfo>
 				</control_infos>
-				<!--Parameter variables (model properties) to optimize.-->
-				<parameters>
-					<MocoParameter name="knee stiffness">
-						<!--Bounds over all time.-->
-						<MocoBounds>
-							<!--1 value: required value. 2 values: lower, upper bounds on value.-->
-							<bounds>0 89080</bounds>
-						</MocoBounds>
-						<!--The path to the model component that owns the property associated with the MocoParameter.-->
-						<component_paths>/forceset/path_spring1</component_paths>
-						<!--The name of the model property associated with the MocoParameter.-->
-						<property_name>stiffness</property_name>
-					</MocoParameter>
-					<MocoParameter name="hip stiffness">
-						<!--Bounds over all time.-->
-						<MocoBounds>
-							<!--1 value: required value. 2 values: lower, upper bounds on value.-->
-							<bounds>0 0</bounds>
-						</MocoBounds>
-						<!--The path to the model component that owns the property associated with the MocoParameter.-->
-						<component_paths>/forceset/path_spring2</component_paths>
-						<!--The name of the model property associated with the MocoParameter.-->
-						<property_name>stiffness</property_name>
-					</MocoParameter>
-					<MocoParameter name="ankle stiffness">
-						<!--Bounds over all time.-->
-						<MocoBounds>
-							<!--1 value: required value. 2 values: lower, upper bounds on value.-->
-							<bounds>0 0</bounds>
-						</MocoBounds>
-						<!--The path to the model component that owns the property associated with the MocoParameter.-->
-						<component_paths>/forceset/path_spring3</component_paths>
-						<!--The name of the model property associated with the MocoParameter.-->
-						<property_name>stiffness</property_name>
-					</MocoParameter>
-				</parameters>
 				<!--Integral/endpoint quantities to minimize or constrain.-->
 				<goals>
 					<MocoJumpGoal name="Jump">
 						<!--All properties of this object have their default values.-->
 					</MocoJumpGoal>
-					<MocoFinalTimeGoal name="Time">
-						<!--In cost mode, the goal is multiplied by this weight (default: 1).-->
-						<weight>0.5</weight>
-					</MocoFinalTimeGoal>
 				</goals>
 			</MocoPhase>
 		</MocoProblem>
 		<!--The optimal control algorithm for solving the problem.-->
 		<MocoCasADiSolver name="solver">
 			<!--The number of uniformly-sized mesh intervals for the problem (default: 100). If a non-uniform mesh exists, the non-uniform mesh is used instead.-->
-			<num_mesh_intervals>100</num_mesh_intervals>
+			<num_mesh_intervals>80</num_mesh_intervals>
 			<!--The optimization solver to use (default: ipopt).-->
 			<optim_solver>ipopt</optim_solver>
 			<!--Maximum number of iterations in the optimization solver (-1 for solver's default).-->
-			<optim_max_iterations>9000</optim_max_iterations>
+			<optim_max_iterations>5000</optim_max_iterations>
 			<!--Tolerance used to determine if the objective is minimized (-1 for solver's default)-->
 			<optim_convergence_tolerance>0.001</optim_convergence_tolerance>
 			<!--Tolerance used to determine if the constraints are satisfied (-1 for solver's default)-->

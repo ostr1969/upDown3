@@ -190,31 +190,31 @@ MocoParameter p0;
 p0.setName("knee stiffness");
 p0.appendComponentPath("/forceset/path_spring1");
 p0.setPropertyName("stiffness");
-MocoBounds massBounds(00000, data.ints[6].val*4454.);
-p0.setBounds(massBounds);
-problem.addParameter(p0);
+MocoBounds Bounds(0, data.ints[6].val*4454.);
+p0.setBounds(Bounds);
+//problem.addParameter(p0);
 
 MocoParameter p1;
 p1.setName("hip stiffness");
 p1.appendComponentPath("/forceset/path_spring2");
 p1.setPropertyName("stiffness");
-MocoBounds massBounds1(00000,  data.ints[7].val*4454.);
-p1.setBounds(massBounds1);
-problem.addParameter(p1);
+MocoBounds Bounds1(0,  data.ints[7].val*4454.);
+p1.setBounds(Bounds1);
+//problem.addParameter(p1);
 
 MocoParameter p2;
 p2.setName("ankle stiffness");
 p2.appendComponentPath("/forceset/path_spring3");
 p2.setPropertyName("stiffness");
-MocoBounds massBounds2(00000,  data.ints[8].val*4454.);
-p2.setBounds(massBounds2);
-problem.addParameter(p2);
+MocoBounds Bounds2(0,  data.ints[8].val*4454.);
+p2.setBounds(Bounds2);
+//problem.addParameter(p2);
     // Cost.
     // -----
     //problem.addGoal<MocoFinalTimeGoal>();
     problem.addGoal<MocoJumpGoal>("Jump");
-    problem.addGoal<MocoFinalTimeGoal>("Time");
-    problem.updGoal("Time").setWeight(0.5);
+   // problem.addGoal<MocoFinalTimeGoal>("Time");
+   // problem.updGoal("Time").setWeight(0.5);
 
 
     // Configure the solver.
@@ -234,7 +234,8 @@ problem.addParameter(p2);
 
     // Now that we've finished setting up the tool, print it to a file.
     study.print("results/mycolo.omoco");
-    //solver.setGuessFile(data.strings[2].val);
+    if (data.strings[2].val.length()>3)
+       solver.setGuessFile(data.strings[2].val);
     // Solve the problem.
     // ==================
     MocoSolution solution = study.solve();
@@ -258,11 +259,13 @@ timSeriesToBinFile(controlTable,"results/mycolo_controls.bin");
     // ==========
     //study.visualize(solution);
     double fwdjump=fwdCheck(osimModel , solution );
- cout<<solution.getObjectiveTermByIndex(0)<<"\t"<<solution.getObjectiveTermByIndex(1)<<endl;
+ cout<<solution.getObjectiveTermByIndex(0)<<"\t"<<solution.getObjectiveTermByIndex(0)<<endl;
     //cout<<"got objective:"<<solution.getObjective()<<endl;
-    cout<<"numsprings:"<<data.ints[3].val<<endl;
-    cout<<"echo "<<data.ints[3].val<<","<<solution.getObjectiveTermByIndex(0)<<","<<fwdjump<<
+    cout<<"numsprings:"<<data.ints[3].val<<"\t"<<data.ints[4].val<<"\t"<<data.ints[5].val<<endl;
+    cout<<"echo "<<data.ints[3].val<<","<<data.ints[4].val<<","<<data.ints[5].val<<","<<solution.getObjectiveTermByIndex(0)<<","<<fwdjump<<
 	">>results/all.csv"<<endl;
-    cout<<"ankle stiffness:"<<solution.getParameter("ankle stiffness")<<endl;
+  //  cout<<"ankle stiffness:"<<solution.getParameter("ankle stiffness")/4454<<endl;
+  //  cout<<"knee stiffness:"<<solution.getParameter("knee stiffness")/4454<<endl;
+  //  cout<<"hip stiffness:"<<solution.getParameter("hip stiffness")/4454<<endl;
     return EXIT_SUCCESS;
 }

@@ -212,13 +212,14 @@ int main(int argc, char *argv[]){
         State &si = osimModel.initSystem();
 // 1=knee 2=hip 3=ankle
         auto& sp1=osimModel.updComponent<PathSpring>("/forceset/path_spring1");
-        sp1.setStiffness(row0(len-3));
+	sp1.setStiffness(4454.76*data.ints[3].val);
 	int spnum1=round(sp1.getStiffness()/4454.76);
         auto& sp2=osimModel.updComponent<PathSpring>("/forceset/path_spring2");
-        sp2.setStiffness(row0(len-2));
+	sp2.setStiffness(4454.76*data.ints[4].val);
+        //sp2.setStiffness(row0(len-2));
 	int spnum2=round(sp2.getStiffness()/4454.76);
         auto& sp3=osimModel.updComponent<PathSpring>("/forceset/path_spring3");
-        sp3.setStiffness(row0(len-1));
+	sp3.setStiffness(4454.76*data.ints[5].val);
 	int spnum3=round(sp3.getStiffness()/4454.76);
         auto& fset=osimModel.updForceSet();
 	/* CoordinateLimitForce* limf1 = dynamic_cast<CoordinateLimitForce*>(&fset.get(1));
@@ -230,7 +231,7 @@ int main(int argc, char *argv[]){
          limf3->set_compute_dissipation_energy(true);
          limf4->set_compute_dissipation_energy(true);*/
 	const MultibodySystem& system=osimModel.updMultibodySystem();
-        system.addEventReporter(new MyReporter(system,.0005,controller,fset));
+        system.addEventReporter(new MyReporter(system,.005,controller,fset));
         State &osimState = osimModel.initializeState();
 	//set initial state from first line of statesfile
 	cout<<"apply first line of states...."<<endl;
