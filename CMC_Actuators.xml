@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ActuatorSet name="gait2392_CMC">
+
+	<defaults>
+
+		<Force name="default">
+			<max_force> 10000.000 </max_force>
+			<min_force> -10000.000 </min_force>
+			<optimal_force> 1000.0 </optimal_force>
+			<body_A> </body_A>
+			<point_A> 0.000 0.000 0.000 </point_A>
+			<direction_A> 0.000 0.000 1.000 </direction_A>
+			<body_B> </body_B>
+			<point_B> 0.000 0.000 0.000 </point_B>
+		</Force>
+		<DelpActuator name="default">
+		<!--Minimum allowed value for control signal. Used when solving for control values.-->
+			<min_control>-1</min_control>
+		<!--Maximum allowed value for control signal. Used when solving for control values.-->
+			<max_control>1</max_control>
+		<!--Name of the generalized coordinate to which the actuator applies.-->
+			<coordinate>q1</coordinate>
+		<!--The maximum generalized force produced by this actuator.-->
+			<optimal_force>1</optimal_force>
+		<!--Smaller value means activation can change more rapidly (units: seconds).-->
+			<activation_time_constant>0.010999999999999999</activation_time_constant>
+		<!--Smaller value means activation can change more rapidly (units: seconds).-->
+			<dactivation_time_constant>0.068000000000000005</dactivation_time_constant>
+		<!--Value of activation in the default state returned by initSystem().-->
+			<default_activation>0</default_activation>
+		<!--Notify 1 if has delp curve, else use optimal force-->
+			<has_delp_curve>1</has_delp_curve>
+		<!--Delp curve filename, file of ang/max biologicl in degrees-->
+			<delp_curve_filename>src/delp1.txt</delp_curve_filename>
+		<!--1 or -1 for velocity factor(ashby)-->
+			<qfac_dir>1</qfac_dir>
+		<!--Maximum velocity in rad/sec if using delp curve-->
+			<max_velocity>16</max_velocity>
+		</DelpActuator>
+
+		<Torque name="default">
+			<max_force> 600.000 </max_force>
+			<min_force> -600.000 </min_force>
+			<optimal_force> 1 </optimal_force>
+			<body_A> </body_A>
+			<direction_A> 0.000 0.000 1.000 </direction_A>
+			<body_B> </body_B>
+		</Torque>
+
+		<GeneralizedForce name="default">
+			<max_force> 10000.0 </max_force>
+			<min_force> -10000.0 </min_force>
+			<optimal_force> 1000.0 </optimal_force>
+			<coordinate> </coordinate>
+		</GeneralizedForce>
+
+	</defaults>
+
+	<objects>
+
+		<!-- Residuals -->
+		<DelpActuator name="default">
+			<coordinate>q1</coordinate>
+			<max_velocity>16</max_velocity>
+		</DelpActuator>
+		<Torque name="M1">
+			<body_A> ground </body_A>
+			<body_B> foot </body_B>
+		</Torque>
+
+		<Torque name="M2">
+			<body_A> foot </body_A>
+			<body_B> shank </body_B>
+		</Torque>
+
+		<Torque name="M3">
+			<body_A> shank </body_A>
+			<body_B> thigh </body_B>
+		</Torque>
+
+		<Torque name="M4">
+			<body_A> thigh </body_A>
+			<body_B> HAT </body_B>
+		</Torque>
+
+	</objects>
+
+</ActuatorSet>

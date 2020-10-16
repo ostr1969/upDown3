@@ -154,10 +154,10 @@ int main() {
 
     // Initial position must be 0, final position must be 1.
     problem.setStateInfo("/jointset/tip/q0/value", MocoBounds(q0L,q0H),
-                         MocoInitialBounds(q0), MocoFinalBounds(q0L,q0H));
+                         {50*Pi/180,70*Pi/180}, MocoFinalBounds(q0L,q0H));
     problem.setStateInfo("/jointset/ankle/q1/value", {q1L,q1H}, q1, {q1L,q1H});
     problem.setStateInfo("/jointset/knee/q2/value",  {q2L,q2H}, q2, {q2L,q2H});
-    problem.setStateInfo("/jointset/hip/q3/value",   {q3L,q3H}, q3, {q3L,q3H});
+    problem.setStateInfo("/jointset/hip/q3/value",   {q3L,q3H}, {-70*Pi/180,-15*Pi/180}, {q3L,q3H});
 
     //problem.setStateInfo("/jointset/tip/q0/value", MocoBounds(qi0L,qi0H),
     //                     MocoInitialBounds(q0), MocoFinalBounds(qi0L,qi0H));
@@ -234,15 +234,39 @@ p2.setBounds(Bounds2);
 
     // Now that we've finished setting up the tool, print it to a file.
     study.print("results/mycolo.omoco");
-    if (data.strings[2].val.length()>3)
+    if (data.ints[9].val==1)
        solver.setGuessFile(data.strings[2].val);
+
     // Solve the problem.
     // ==================
     MocoSolution solution = study.solve();
+    if (solution.isSealed()){
+        cout<<"*********DID NOT CONVERGED*********\n";
+        return 0;}
+
     //solution.unseal();
     debugLog<<"got objective:"<<solution.getObjective()<<endl;
 	//solution.resampleWithNumTimes(50);
     solution.write("results/mycolo_traj.sto");
+
+    string sp1s=to_string(data.ints[3].val);
+    string sp2s=to_string(data.ints[4].val);
+    string sp3s=to_string(data.ints[5].val);
+    TimeSeriesTable ts=solution.convertToTable();
+    ts.updTableMetaData().setValueForKey(data.ints[3].label,sp1s) ;
+    ts.updTableMetaData().setValueForKey(data.ints[4].label,sp2s) ;
+    ts.updTableMetaData().setValueForKey(data.ints[5].label,sp3s) ;
+    ts.updTableMetaData().setValueForKey(data.doubles[0].label,to_string(data.doubles[0].val)) ;
+    ts.updTableMetaData().setValueForKey(data.doubles[2].label,to_string(data.doubles[2].val)) ;
+    char filn[80]="results/traj";
+        strcat(filn,sp1s.c_str());strcat(filn,".");strcat(filn,sp2s.c_str());strcat(filn,".");
+        strcat(filn,sp3s.c_str());strcat(filn,".sto");
+
+    STOFileAdapter::write(ts, filn);
+    STOFileAdapter::write(ts, "results/lasttraj.sto");
+
+
+
     TimeSeriesTable statesTable=solution.exportToStatesTable();
 timSeriesToBinFile(statesTable,"results/mycolo_states.bin");
    // Storage statestorage=solution.exportToStatesStorage();
@@ -260,12 +284,9 @@ timSeriesToBinFile(controlTable,"results/mycolo_controls.bin");
     //study.visualize(solution);
     double fwdjump=fwdCheck(osimModel , solution );
  cout<<solution.getObjectiveTermByIndex(0)<<"\t"<<solution.getObjectiveTermByIndex(0)<<endl;
-    //cout<<"got objective:"<<solution.getObjective()<<endl;
-    cout<<"numsprings:"<<data.ints[3].val<<"\t"<<data.ints[4].val<<"\t"<<data.ints[5].val<<endl;
-    cout<<"echo "<<data.ints[3].val<<","<<data.ints[4].val<<","<<data.ints[5].val<<","<<solution.getObjectiveTermByIndex(0)<<","<<fwdjump<<
-	">>results/all.csv"<<endl;
-  //  cout<<"ankle stiffness:"<<solution.getParameter("ankle stiffness")/4454<<endl;
-  //  cout<<"knee stiffness:"<<solution.getParameter("knee stiffness")/4454<<endl;
-  //  cout<<"hip stiffness:"<<solution.getParameter("hip stiffness")/4454<<endl;
+
+    cout<<"numsprings[KHA]:"<<data.ints[3].val<<","<<data.ints[4].val<<","<<data.ints[5].val
+        <<"         fwdjump:"<<fwdjump<<endl;
+
     return EXIT_SUCCESS;
 }

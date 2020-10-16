@@ -28,7 +28,7 @@ using namespace std;
 
 
 void MocoJumpGoal::initializeOnModelImpl(const Model& model ) const {
-    setRequirements(1, 2);
+    setRequirements(0, 2);
 	//model.print("aaa.osim");
     
 }
@@ -48,10 +48,11 @@ void MocoJumpGoal::calcIntegrandImpl(
     fn=k*k*(3-2*k)*(y2-y1)+y1;
     fn=0;}
     if (f<0){
-    t1=-300;t2=0;double y1=30,y2=0;
+    t1=-30000;t2=0;double y1=80000,y2=0;
     k=std::max(0.,std::min(1.,(f-t1)/(t2-t1)));
     fn=k*k*(3-2*k)*(y2-y1)+y1;
     //cout<<"f:"<<f<<" fn:"<<fn<<endl;
+    fn=f*f;
 	}
     integrand = fn;
 //    getModel().realizeVelocity(input.state);
@@ -72,16 +73,17 @@ void MocoJumpGoal::calcGoalImpl(
                 getModel().calcMassCenterVelocity(input.final_state);
         SimTK::Vec3 comFinalP =
                 getModel().calcMassCenterPosition(input.final_state);
+        SimTK::Vec3 comInitialP =
+                getModel().calcMassCenterPosition(input.initial_state);
 	getModel().realizeAcceleration(input.final_state);
 	 getModel().getMultibodySystem().getMatterSubsystem().
 			calcMobilizerReactionForces( input.final_state,forcesAtMInG);
 
-    double t1=-.2,t2=0.2,vy=comFinalV(1);
-    double k=std::max(0.,std::min(1.,(vy-t1)/(t2-t1)));
-    double dirac=k*k*(3-2*k);
-    cost[0]=-vy*vy/2./9.81*dirac-comFinalP(1);
+    double vy=comFinalV(1),vx=comFinalV(0),posx=comFinalP(0),posy=comFinalP(1);
+    double posx0=comInitialP(0);
+    cost[0]=-vy-posy;//maximize end posy and end vy
 
-    double f=forcesAtMInG[0][1][1];
+    /*double f=forcesAtMInG[0][1][1];
     if (f>=0){
     t1=0;t2=28000;double y1=0,y2=28;
     k=std::max(0.,std::min(1.,(f-t1)/(t2-t1)));
@@ -90,7 +92,15 @@ void MocoJumpGoal::calcGoalImpl(
     t1=-10000;t2=0;double y1=500,y2=0;
     k=std::max(0.,std::min(1.,(f-t1)/(t2-t1)));
     //cost[1]=k*k*(3-2*k)*(y2-y1)+y1;}
-		}
-    cost[1] = input.integral;
-    //std::cout<<cost[1]<<std::endl;
+    	}*/
+    double t1=-.5,t2=0,y1=10,y2=0;
+    double k1=std::max(0.,std::min(1.,(posx-t1)/(t2-t1)));
+    double dirac1=k1*k1*(3-2*k1)*(y2-y1)+y1;
+    double k0=std::max(0.,std::min(1.,(posx0-t1)/(t2-t1)));
+    double dirac0=k0*k0*(3-2*k0)*(y2-y1)+y1;
+    //cost[0]=-vy*vy/2./9.81*dirac-comFinalP(1);
+    //cost[0] = dirac0;
+    cost[1] = dirac1;//positive punishment for negative end posx	
+    //cost[2] = input.integral;
+    //cout<<comFinalP<<","<<cost<<endl;
 }

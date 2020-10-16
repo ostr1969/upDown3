@@ -118,10 +118,11 @@ public:
         system.realize(state, Stage::Acceleration);
         Vec3 COM_position = system.getMatterSubsystem().
                         calcSystemMassCenterLocationInGround(state);
+        
 
         system.getMatterSubsystem().calcMobilizerReactionForces( state,forcesAtMInG);
         std::cout << state.getTime() << "\t" << forcesAtMInG[0][1][1] <<
-			 "\t" << COM_position[1] << std::endl;
+			 "," << forcesAtMInG[0][1][2]<<"\t"<<COM_position << std::endl;
     }
 private:
     const MultibodySystem& system;
@@ -259,6 +260,7 @@ double fwdCheck(Model &osimModel ,MocoTrajectory solution){
                                 pow(COM_velocity[1], 2.0)/(2.0*g):0);
         auto row0=statesTable.getNearestRow(0,true)*180/Pi;
         cout<<"initAng:"<<row0[6]<<","<<row0[8]<<","<<row0[10]<<","<<row0[12]<<endl;
+	cout<<"Pos:"<<COM_position<<" vel:"<<COM_velocity<<endl;
 
 
         cout<<"fwd check jump:"<<maxHeight<<endl;
