@@ -21,6 +21,8 @@
 #include "OpenSim/Common/STOFileAdapter.h"
 #define BUILD 1
 #include "additions.h"
+#include "readx_y.h"
+#include <OpenSim/Common/SimmSpline.h>
 
 using std::string;
 #define MAXN 1000
@@ -173,19 +175,49 @@ try
         ankle->updCoordinate().setName("q1");
         knee->updCoordinate().setName("q2");
         hip->updCoordinate().setName("q3");
+	auto& coordSet = osimModel.updCoordinateSet();
+
+	double cx[40];
+	double cy[40];int sz;
+readx_y("src/delp1.txt",cx,cy,sz);SimmSpline flc1(sz, cx,cy);double ankleRange[2]={cx[0],cx[sz-1]};
+readx_y("src/delp2.txt",cx,cy,sz);SimmSpline flc2(sz, cx,cy);
+readx_y("src/delp3.txt",cx,cy,sz);SimmSpline flc3(sz, cx,cy);
+readx_y("src/delp4.txt",cx,cy,sz);SimmSpline flc4(sz, cx,cy);double kneeRange[2]={cx[0],cx[sz-1]};
+readx_y("src/delp5.txt",cx,cy,sz);SimmSpline flc5(sz, cx,cy);double hipRange[2]={cx[0],cx[sz-1]};
+readx_y("src/delp6.txt",cx,cy,sz);SimmSpline flc6(sz, cx,cy);
+	auto* a1=new DelpActuator("ap",16.,1,.011,.068,0.,"src/delp1.txt",&coordSet.get("q1"));
+	auto* a2=new DelpActuator("kp",18.,1,.011,.068,0.,"src/delp4.txt",&coordSet.get("q2"));
+	auto* a3=new DelpActuator("hp",20.,1,.011,.068,0.,"src/delp5.txt",&coordSet.get("q3"));
+	auto* a_1=new DelpActuator("am",16.,-1,.011,.068,0.,"src/delp2.txt",&coordSet.get("q1"));
+	auto* a_2=new DelpActuator("km",18.,-1,.011,.068,0.,"src/delp3.txt",&coordSet.get("q2"));
+	auto* a_3=new DelpActuator("hm",20.,-1,.011,.068,0.,"src/delp6.txt",&coordSet.get("q3"));
+	a1->setTorqueAngleCurve(flc1);a2->setTorqueAngleCurve(flc4);a3->setTorqueAngleCurve(flc5);
+	a_1->setTorqueAngleCurve(flc2);a_2->setTorqueAngleCurve(flc3);a_3->setTorqueAngleCurve(flc6);
+	cout<<":::"<<flc1.getXValues()[0]<<endl;
+
+       //	aa1->set_force_length_curve(flc); 
+	osimModel.addComponent(a1);
+	osimModel.addComponent(a2);
+	osimModel.addComponent(a3);
+	osimModel.addComponent(a_1);
+	osimModel.addComponent(a_2);
+	osimModel.addComponent(a_3);
+//        osimModel.finalizeConnections();
+      //  osimModel.print("results/base3springs.osim");
+        PrescribedController* actcontroller =  new PrescribedController();
         
         // define the simulation times
- 	DelpActuator* a1=addDelpActuator(osimModel, "q1","ap","src/delp1.txt", 1,16);
+ 	/*DelpActuator* a1=addDelpActuator(osimModel, "q1","ap","src/delp1.txt", 1,16);
  	DelpActuator* a2=addDelpActuator(osimModel, "q2","kp","src/delp4.txt", 1,18);
  	DelpActuator* a3=addDelpActuator(osimModel, "q3","hp","src/delp5.txt", 1,20);
  	DelpActuator* a_1=addDelpActuator(osimModel, "q1","am","src/delp2.txt", 1,16);
  	DelpActuator* a_2=addDelpActuator(osimModel, "q2","km","src/delp3.txt", 1,18);
- 	DelpActuator* a_3=addDelpActuator(osimModel, "q3","hm","src/delp6.txt", 1,20);
+ 	DelpActuator* a_3=addDelpActuator(osimModel, "q3","hm","src/delp6.txt", 1,20);*/
 
         double toeRange[2] = {0, Pi/2};
-        double ankleRange[2]={a1->getDelpLowAngle(),a1->getDelpHighAngle()};
-        double kneeRange[2] ={a2->getDelpLowAngle(),a2->getDelpHighAngle()} ;
-        double hipRange[2] ={a3->getDelpLowAngle(),a3->getDelpHighAngle()} ;
+//        double ankleRange[2]={a1->getDelpLowAngle(),a1->getDelpHighAngle()};
+//        double kneeRange[2] ={a2->getDelpLowAngle(),a2->getDelpHighAngle()} ;
+//        double hipRange[2] ={a3->getDelpLowAngle(),a3->getDelpHighAngle()} ;
         cout<<ankleRange[0]*180/Pi<<","<<ankleRange[1]*180/Pi<<endl;
         cout<<kneeRange[0]*180/Pi<<","<<kneeRange[1]*180/Pi<<endl;
         cout<<hipRange[0]*180/Pi<<","<<hipRange[1]*180/Pi<<endl;
@@ -195,7 +227,6 @@ try
         knee->updCoordinate().setRange(kneeRange);
         hip->updCoordinate().setRange(hipRange);
         // add the controller to the model
-        PrescribedController* actcontroller =  new PrescribedController();
         actcontroller->addActuator(*a1);
         actcontroller->addActuator(*a2);
         actcontroller->addActuator(*a3);
@@ -212,6 +243,16 @@ try
         actcontroller->set_interpolation_method(3);
     
         osimModel.addController(actcontroller);
+	/*auto actuators=osimModel.getComponentList<Actuator>();
+	const auto actuators=osimModel.updComponentList<Actuator>();
+	int numa=0;
+	for (auto& actuator : actuators) {
+		           numa++;
+			   cout<<"..."<<actuator.getName()<<endl;
+				cout<<actuator.get_appliesForce()<<endl;}
+	auto& actuators2 =osimModel.updActuators();
+	cout<<actuators2.getSize()<<","<<numa<<endl;*/
+
 
         //const ControllerSet &cs= osimModel.getControllerSet();
         osimModel.setGravity(Vec3(0., -9.81   , 0.));
@@ -224,7 +265,6 @@ try
 	double pullyrad=0.05,pullylength=0.05;
            // body that acts as the pulley that the path wraps over
 
-cout<<__LINE__<<endl;
         OpenSim::Body* pulleyBody1 =
         new OpenSim::Body("PulleyBody1", pullymass ,Vec3(0),  pullymass*Inertia::sphere(0.1));
         OpenSim::Body* pulleyBody2 =
@@ -281,21 +321,21 @@ cout<<__LINE__<<endl;
     	spring3->updGeometryPath().
         appendNewPathPoint("insert3", *linkage1, Vec3(-pullyrad,linkageLength1-.1,0));
     	spring3->updGeometryPath().addPathWrap(*pulley3);
-cout<<__LINE__<<endl;
     	osimModel.addForce(spring1);
     	osimModel.addForce(spring2);
     	osimModel.addForce(spring3);
+cout<<"L:"<<__LINE__<<endl;
         osimModel.finalizeConnections();
-cout<<__LINE__<<endl;
  
 
+cout<<"L:"<<__LINE__<<endl;
         // Initialize system
         osimModel.buildSystem();
-cout<<__LINE__<<endl;
         //default activation must come before initstate
 
+cout<<"L:"<<__LINE__<<endl;
         State &si = osimModel.initializeState();
-cout<<__LINE__<<endl;
+cout<<"L:"<<__LINE__<<endl;
 
        double q0=80,q1=-110,q2=60,q3=-80 ;
         // Pin joint initial states
@@ -308,11 +348,11 @@ cout<<__LINE__<<endl;
         // Setup ForceReporter and Manager
         ForceReporter* forces = new ForceReporter(&osimModel);  
         osimModel.updAnalysisSet().adoptAndAppend(forces);
-cout<<__LINE__<<endl;
 //
 //find initial optimal values for initial state(after setting angles)
 	Vector udot(4,0.);
         InverseDynamicsSolver insol(osimModel);
+cout<<__LINE__<<"sol"<<endl;
         Vector init_tou=insol.solve(si,udot);
         cout<<"torques for static equilibrium:"<<init_tou<<endl;
 

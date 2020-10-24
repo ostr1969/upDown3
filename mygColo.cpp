@@ -82,6 +82,9 @@ Model buildmodel(){
         //osimModel.addForce(ankleLimitForce);
         //osimModel.addForce(kneeLimitForce);
         //osimModel.addForce(hipLimitForce);
+	ForceReporter* forceReporter = new ForceReporter(&osimModel);
+		        osimModel.addAnalysis(forceReporter);
+
 
 	osimModel.buildSystem();
         State &si = osimModel.initializeState();
@@ -243,11 +246,11 @@ p2.setBounds(Bounds2);
     if (solution.isSealed()){
         cout<<"*********DID NOT CONVERGED*********\n";
         return 0;}
-
     //solution.unseal();
     debugLog<<"got objective:"<<solution.getObjective()<<endl;
 	//solution.resampleWithNumTimes(50);
     solution.write("results/mycolo_traj.sto");
+    //auto fwd2=OpenSim::simulateTrajectoryWithTimeStepping(solution,osimModel,0.001);
 
     string sp1s=to_string(data.ints[3].val);
     string sp2s=to_string(data.ints[4].val);
@@ -282,11 +285,11 @@ timSeriesToBinFile(controlTable,"results/mycolo_controls.bin");
     // Visualize.
     // ==========
     //study.visualize(solution);
-    double fwdjump=fwdCheck(osimModel , solution );
+  //  double fwdjump=fwdCheck(osimModel , solution );
  cout<<solution.getObjectiveTermByIndex(0)<<"\t"<<solution.getObjectiveTermByIndex(0)<<endl;
 
-    cout<<"numsprings[KHA]:"<<data.ints[3].val<<","<<data.ints[4].val<<","<<data.ints[5].val
-        <<"         fwdjump:"<<fwdjump<<endl;
+    cout<<"numsprings[KHA]:"<<data.ints[3].val<<","<<data.ints[4].val<<","<<data.ints[5].val<<endl;
+       // <<"         fwdjump:"<<fwdjump<<endl;
 
     return EXIT_SUCCESS;
 }

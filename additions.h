@@ -1,7 +1,7 @@
 //#include <Moco/Components/ActivationCoordinateActuator.h>
 #include <OpenSim/Common/STOFileAdapter.h>
 #include <Moco/osimMoco.h>
-#include "myPrescribedController.cpp"
+//#include "myPrescribedController.cpp"
 //#include "console.h"
 using namespace OpenSim;
 using namespace SimTK;
