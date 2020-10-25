@@ -373,6 +373,7 @@ cout<<__LINE__<<endl;
         cout<<"spring tension:"<<spring1->getTension(si)<<"\t"<<spring2->getTension(si)
 	<<"\t"<<spring3->getTension(si)<<endl;
         //cout<<"spring arm:"<<spring1->computeMomentArm(si, coordinates[2])
+	AnalyzeTool("analyze.xml").run();
         
         osimModel.print("results/base3springs.osim");
 cout<<__LINE__<<endl;

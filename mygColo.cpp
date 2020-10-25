@@ -157,17 +157,16 @@ int main() {
 
     // Initial position must be 0, final position must be 1.
     problem.setStateInfo("/jointset/tip/q0/value", MocoBounds(q0L,q0H),
-                         {50*Pi/180,70*Pi/180}, MocoFinalBounds(q0L,q0H));
-    problem.setStateInfo("/jointset/ankle/q1/value", {q1L,q1H}, q1, {q1L,q1H});
-    problem.setStateInfo("/jointset/knee/q2/value",  {q2L,q2H}, q2, {q2L,q2H});
-    problem.setStateInfo("/jointset/hip/q3/value",   {q3L,q3H}, {-70*Pi/180,-15*Pi/180}, {q3L,q3H});
+                         {30*Pi/180,80*Pi/180}, MocoFinalBounds(q0L,q0H));
+    problem.setStateInfo("/jointset/ankle/q1/value", {q1L,q1H}, {-109*Pi/180,-100*Pi/180}, {q1L,q1H});
+    problem.setStateInfo("/jointset/knee/q2/value",  {q2L,q2H}, {20*Pi/180,50*Pi/180}, {q2L,q2H});
+    problem.setStateInfo("/jointset/hip/q3/value",   {q3L,q3H}, {-40*Pi/180,-15*Pi/180}, {q3L,q3H});
 
-    //problem.setStateInfo("/jointset/tip/q0/value", MocoBounds(qi0L,qi0H),
-    //                     MocoInitialBounds(q0), MocoFinalBounds(qi0L,qi0H));
-    //problem.setStateInfo("/jointset/ankle/q1/value", {q1l,q1h}, q1, {q1l,q1h});
-    //problem.setStateInfo("/jointset/knee/q2/value",  {q2l,q2h},  q2, {q2l,q2h});
-    //problem.setStateInfo("/jointset/hip/q3/value",   {q3l,q3h},  q3, {q3l,q3h});
-    // Initial and final speed must be 0. Use compact syntax.
+   // problem.setStateInfo("/jointset/tip/q0/value", MocoBounds(q0L,q0H),
+   //                      q0, MocoFinalBounds(q0L,q0H));
+   // problem.setStateInfo("/jointset/ankle/q1/value", {q1L,q1H}, q1, {q1L,q1H});
+   // problem.setStateInfo("/jointset/knee/q2/value",  {q2L,q2H}, q2, {q2L,q2H});
+   // problem.setStateInfo("/jointset/hip/q3/value",   {q3L,q3H}, q3, {q3L,q3H});
     double v=55.;
     problem.setStateInfoPattern("/jointset/.*/speed", {-v, v}, 0, {});
     //problem.setStateInfoPattern("/forceset/.*LimitForce/dissipatedEnergy",{-1e6,1e6} , 0, {});
@@ -214,9 +213,9 @@ p2.setBounds(Bounds2);
 //problem.addParameter(p2);
     // Cost.
     // -----
-    //problem.addGoal<MocoFinalTimeGoal>();
+   // problem.addGoal<MocoFinalTimeGoal>();
     problem.addGoal<MocoJumpGoal>("Jump");
-   // problem.addGoal<MocoFinalTimeGoal>("Time");
+    problem.addGoal<MocoFinalTimeGoal>("Time");
    // problem.updGoal("Time").setWeight(0.5);
 
 
@@ -250,33 +249,40 @@ p2.setBounds(Bounds2);
     debugLog<<"got objective:"<<solution.getObjective()<<endl;
 	//solution.resampleWithNumTimes(50);
     solution.write("results/mycolo_traj.sto");
-    //auto fwd2=OpenSim::simulateTrajectoryWithTimeStepping(solution,osimModel,0.001);
+    TimeSeriesTable statesTable=solution.exportToStatesTable();
+    STOFileAdapter::write(statesTable, "results/mycolo_states.sto");
+    TimeSeriesTable controlTable=solution.exportToControlsTable();
+    STOFileAdapter::write(controlTable, "results/mycolo_controls.sto");
+    AnalyzeTool("analyze.xml").run();
+    TimeSeriesTable posTable("Analyzes/4linkModel_BodyKinematics_pos_global.sto");
+    TimeSeriesTable velTable("Analyzes/4linkModel_BodyKinematics_vel_global.sto");
 
+    RowVectorView endpos=posTable.getNearestRow(10,false);
+    RowVectorView endvel=velTable.getNearestRow(10,false);//without the time
+    double jumphight=endpos[43]+endvel[43]*endvel[43]/2/9.81;
+    
+    string sp0s=to_string(data.ints[1].val);
     string sp1s=to_string(data.ints[3].val);
     string sp2s=to_string(data.ints[4].val);
     string sp3s=to_string(data.ints[5].val);
     TimeSeriesTable ts=solution.convertToTable();
+    ts.updTableMetaData().setValueForKey(data.ints[1].label,sp0s) ;
     ts.updTableMetaData().setValueForKey(data.ints[3].label,sp1s) ;
     ts.updTableMetaData().setValueForKey(data.ints[4].label,sp2s) ;
     ts.updTableMetaData().setValueForKey(data.ints[5].label,sp3s) ;
     ts.updTableMetaData().setValueForKey(data.doubles[0].label,to_string(data.doubles[0].val)) ;
     ts.updTableMetaData().setValueForKey(data.doubles[2].label,to_string(data.doubles[2].val)) ;
+    ts.updTableMetaData().setValueForKey("jump",to_string(jumphight)) ;
     char filn[80]="results/traj";
         strcat(filn,sp1s.c_str());strcat(filn,".");strcat(filn,sp2s.c_str());strcat(filn,".");
         strcat(filn,sp3s.c_str());strcat(filn,".sto");
 
     STOFileAdapter::write(ts, filn);
-    STOFileAdapter::write(ts, "results/lasttraj.sto");
 
 
 
-    TimeSeriesTable statesTable=solution.exportToStatesTable();
+
 timSeriesToBinFile(statesTable,"results/mycolo_states.bin");
-   // Storage statestorage=solution.exportToStatesStorage();
-    STOFileAdapter::write(statesTable, "results/mycolo_states.sto");
-    TimeSeriesTable controlTable=solution.exportToControlsTable();
-    STOFileAdapter::write(controlTable, "results/mycolo_controls.sto");
-
 timSeriesToBinFile(controlTable,"results/mycolo_controls.bin");
 
 
@@ -286,10 +292,10 @@ timSeriesToBinFile(controlTable,"results/mycolo_controls.bin");
     // ==========
     //study.visualize(solution);
   //  double fwdjump=fwdCheck(osimModel , solution );
- cout<<solution.getObjectiveTermByIndex(0)<<"\t"<<solution.getObjectiveTermByIndex(0)<<endl;
+// cout<<solution.getObjectiveTermByIndex(0)<<"\t"<<solution.getObjectiveTermByIndex(0)<<endl;
 
-    cout<<"numsprings[KHA]:"<<data.ints[3].val<<","<<data.ints[4].val<<","<<data.ints[5].val<<endl;
-       // <<"         fwdjump:"<<fwdjump<<endl;
+    cout<<"numsprings[KHA]:"<<data.ints[3].val<<","<<data.ints[4].val<<","<<data.ints[5].val
+        <<"         jump:"<<jumphight<<endl;
 
     return EXIT_SUCCESS;
 }
