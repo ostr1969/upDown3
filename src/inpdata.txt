@@ -12,8 +12,8 @@ d initial_q0 90
 d initial_q1 -105
 d initial_q2 25
 d initial_q3 -10
-i num_of_springs_knee 0
-i num_of_springs_hip 19
+i num_of_springs_knee 12
+i num_of_springs_hip 0
 i num_of_springs_ankle 0
 i max_num_of_springs_knee 0
 i max_num_of_springs_hip 0

@@ -879,7 +879,7 @@
 					<!--The resting length (m) of the PathSpring-->
 					<resting_length>0.40000000000000002</resting_length>
 					<!--The linear stiffness (N/m) of the PathSpring-->
-					<stiffness>0</stiffness>
+					<stiffness>53457.120000000003</stiffness>
 					<!--The dissipation factor (s/m) of the PathSpring-->
 					<dissipation>0.01</dissipation>
 				</PathSpring>
@@ -925,7 +925,7 @@
 					<!--The resting length (m) of the PathSpring-->
 					<resting_length>0.40000000000000002</resting_length>
 					<!--The linear stiffness (N/m) of the PathSpring-->
-					<stiffness>84640.440000000002</stiffness>
+					<stiffness>0</stiffness>
 					<!--The dissipation factor (s/m) of the PathSpring-->
 					<dissipation>0.01</dissipation>
 				</PathSpring>

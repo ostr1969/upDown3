@@ -831,22 +831,22 @@
 					<FunctionSet name="ControlFunctions">
 						<objects>
 							<Constant>
-								<value>0</value>
+								<value>100</value>
 							</Constant>
 							<Constant>
-								<value>0</value>
+								<value>100</value>
 							</Constant>
 							<Constant>
-								<value>0</value>
+								<value>100</value>
 							</Constant>
 							<Constant>
-								<value>0</value>
+								<value>100</value>
 							</Constant>
 							<Constant>
-								<value>0</value>
+								<value>100</value>
 							</Constant>
 							<Constant>
-								<value>0</value>
+								<value>100</value>
 							</Constant>
 						</objects>
 						<groups />

@@ -56,22 +56,6 @@
 					<!--Flag (true or false) indicating whether to express results in the global frame or local-frames of the bodies. Body positions and center of mass results are always given in the global frame. This flag is set to false by default.-->
 					<express_results_in_body_local_frame>false</express_results_in_body_local_frame>
 				</BodyKinematics>
-				<PointKinematics name="PointKinematics">
-					<!--Flag (true or false) specifying whether on. True by default.-->
-					<on>true</on>
-					<!--Start time.-->
-					<start_time>0</start_time>
-					<!--End time.-->
-					<end_time>1.9</end_time>
-					<!--Specifies how often to store results during a simulation. More specifically, the interval (a positive integer) specifies how many successful integration steps should be taken before results are recorded again.-->
-					<step_interval>1</step_interval>
-					<!--Flag (true or false) indicating whether the results are in degrees or not.-->
-					<in_degrees>true</in_degrees>
-					<body_name>ground</body_name>
-					<relative_to_body_name>none</relative_to_body_name>
-					<point_name>NONAME</point_name>
-					<point> 0 0 0</point>
-				</PointKinematics>
 				<JointReaction name="JointReaction">
 					<!--Flag (true or false) specifying whether on. True by default.-->
 					<on>true</on>
