@@ -4,6 +4,12 @@ function onejump {
 n1=$(echo $1|cut -dj -f2|cut -d. -f1)
 n2=$(echo $1|cut -dj -f2|cut -d. -f2)
 n3=$(echo $1|cut -dj -f2|cut -d. -f3)
+s1=$(bc <<<"scale=2;$n1*4454.76")
+s2=$(bc <<<"scale=2;$n2*4454.76")
+s3=$(bc <<<"scale=2;$n3*4454.76")
+xmlstarlet ed -L -u  '//ForceSet/objects/PathSpring[@name="path_spring1"]/stiffness' -v  $s1 \
+	 -u '//ForceSet/objects/PathSpring[@name="path_spring2"]/stiffness' -v  $s2 \
+	  -u '//ForceSet/objects/PathSpring[@name="path_spring3"]/stiffness' -v  $s3 actuators.xml
 sed -i  "s|results/traj.*sto|$1|g" analyze2.xml
 sed -i  "s|KHA[0-9\.]*|KHA$n1.$n2.$n3|g" analyze2.xml
  ~/MOCOBIN/opensim-core/bin/opensim-cmd run-tool ./analyze2.xml &>/dev/null
